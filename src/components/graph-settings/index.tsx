@@ -4,6 +4,7 @@ import { Dispatch, RefObject, SetStateAction, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import ClassesSettings from "./classes";
 import { Graph } from "@/types";
+import FreeSettings from "./free";
 
 interface GraphSettingsProps {
     dragConstraintRef: RefObject<HTMLElement | null>,
@@ -27,7 +28,7 @@ export default function GraphSettings({
         {
             value: 'free',
             name: 'Livre',
-            content: <></>
+            content: <FreeSettings setGraph={setGraph} />
         }
     ];
 

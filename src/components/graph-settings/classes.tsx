@@ -9,7 +9,7 @@ export default function ClassesSettings() {
         >
             <Input type="number" placeholder="Quantidade de Vértices" />
 
-            <Button>Atualizar Grafo </Button>
+            <Button>Gerar Grafo</Button>
         </form>
     );
 }
