@@ -17,7 +17,7 @@ const validateTotalColoring = (targetElement: SingularElementArgument): Validate
         adjacentElements = incidentVertices.union(adjacentEdges);
     }
 
-    let validationResult: ValidatedTotalColoring = {
+    const validationResult: ValidatedTotalColoring = {
         hasConflict: false,
         adjacentElements: adjacentElements
     };
