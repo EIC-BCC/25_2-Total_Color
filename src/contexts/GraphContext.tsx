@@ -1,9 +1,9 @@
-import { Graph } from "@/types";
+import { Graph, GraphValues } from "@/types";
 import { createContext, ReactNode, useContext, useState } from "react";
 
 type GraphContextType = {
     graph: Graph,
-    updateGraph: (newValues: Graph) => void
+    updateGraph: (newValues: GraphValues) => void
 }
 
 const GraphContext = createContext<GraphContextType | null>(null);
@@ -11,13 +11,14 @@ const GraphContext = createContext<GraphContextType | null>(null);
 export function GraphProvider({
     children
 }: { children: ReactNode }) {
-    const [graph, setGraph] = useState<Graph>({});
+    const [graph, setGraph] = useState<Graph>({ renderings: 0 });
 
-    const updateGraph = (newValues: Graph) => {
+    const updateGraph = (newValues: GraphValues) => {
         setGraph((prev) => ({
             ...prev,
             layout: '',
-            ...newValues
+            ...newValues,
+            renderings: prev.renderings + 1
         }));
     };
 

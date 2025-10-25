@@ -1,4 +1,3 @@
-import { ElementsDefinition } from "cytoscape";
 import { Collection, SingularElementArgument } from "cytoscape";
 import { graph6ToMatrix } from "./graph6";
 import { GraphFile } from "@/types";
@@ -23,31 +22,6 @@ const getGraphMatrix = (graphFile: GraphFile): number[][] => {
 
     return matrix;
 }
-
-const getGraphElements = (matrix: number[][]): ElementsDefinition => {
-    const elements: ElementsDefinition = {
-        nodes: [],
-        edges: []
-    };
-
-    const order = matrix.length;
-
-    for (let i = 0; i < order; i++) {
-        elements.nodes.push({
-            data: { id: `v${i + 1}`, hasConflict: false }
-        });
-
-        for (let j = i + 1; j < order; j++) {
-            if (matrix[i][j]) {
-                elements.edges.push({
-                    data: { id: `v${i+1}v${j+1}`, source: `v${i+1}`, target: `v${j+1}`, hasConflict: false }
-                });
-            }
-        }
-    }
-    
-    return elements;
-};
 
 const validateTotalColoring = (targetElement: SingularElementArgument): ValidatedTotalColoring => {    
     let adjacentElements: Collection;
@@ -79,4 +53,4 @@ const validateTotalColoring = (targetElement: SingularElementArgument): Validate
     return validationResult;
 };
 
-export { getGraphMatrix ,getGraphElements, validateTotalColoring }
+export { getGraphMatrix, validateTotalColoring }

@@ -4,7 +4,7 @@ import { Button } from "../ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { useGraph } from "@/contexts/GraphContext";
 import { GraphFile } from "@/types";
-import { getGraphElements, getGraphMatrix } from "@/lib/graphs";
+import { getGraphMatrix } from "@/lib/graphs";
 
 export default function FreeSettings() {
     const { updateGraph } = useGraph();
@@ -19,9 +19,9 @@ export default function FreeSettings() {
 
         reader.onload = () => {
             if (typeof reader.result === 'string') {
-                const isG6 = (str: string) => /.+\.g6$/g.test(str);
+                const isG6 = /.+\.g6$/g;
 
-                if (isG6(newFiles[0].name)) {
+                if (isG6.test(newFiles[0].name)) {
                     setGraphFile({
                         type: 'g6',
                         text: reader.result.split(/\s+/g)[0]
@@ -43,12 +43,10 @@ export default function FreeSettings() {
 
         if (graphFile) {
             const matrix = getGraphMatrix(graphFile);
-            const elements = getGraphElements(matrix);
     
             updateGraph({
                 file: graphFile,
                 matrix,
-                elements,
                 layout
             });
         }
@@ -106,7 +104,7 @@ export default function FreeSettings() {
                 </section>
             </section>
 
-            <Button disabled={!graphFile && !files}>Gerar Grafo</Button>
+            <Button disabled={!graphFile}>Gerar Grafo</Button>
         </form>
     );
 }

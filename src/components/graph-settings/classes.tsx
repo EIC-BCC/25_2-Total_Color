@@ -3,26 +3,26 @@ import { Button } from "../ui/button";
 import { Label } from "../ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { Input } from "../ui/input";
-import { getCompleteGraphMatrix, getCompleteGraphTotalColoring, getGraphElements } from "@/lib/graphs";
+import { getCompleteGraphMatrix, getCompleteGraphTotalColoring } from "@/lib/graphs";
 import { useGraph } from "@/contexts/GraphContext";
 
 export default function ClassesSettings() {
     const { updateGraph } = useGraph();
     const [graphClass, setGraphClass] = useState('');
-    const [qtdVertices, setQtdVertices] = useState(3);
+    const [order, setOrder] = useState(3);
 
     const handleSubmit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        if (graphClass === 'completos') {
-            const matrix = getCompleteGraphMatrix(qtdVertices);
-            const elements = getGraphElements(matrix);
-            console.log(getCompleteGraphTotalColoring(qtdVertices));
+        if (graphClass === 'completes') {
+            const matrix = getCompleteGraphMatrix(order);
+            const totalColoring = getCompleteGraphTotalColoring(order);
 
             updateGraph({
                 matrix,
-                elements,
-                layout: 'circle'
+                totalColoring,
+                layout: 'circle',
+                class: 'completes'
             });
         }
     };
@@ -43,7 +43,7 @@ export default function ClassesSettings() {
                             <SelectValue placeholder="Selecione uma classe" />
                         </SelectTrigger>                    
                         <SelectContent>
-                            <SelectItem value="completos">Completos</SelectItem>
+                            <SelectItem value="completes">Completos</SelectItem>
                         </SelectContent>
                     </Select>
                 </div>
@@ -55,14 +55,14 @@ export default function ClassesSettings() {
                 </h2>
 
                 <div className="flex gap-4">
-                    <Label htmlFor="qtdVertices" className="font-normal">Quantidade de vértices</Label>
+                    <Label htmlFor="order" className="font-normal">Quantidade de vértices</Label>
                     <Input
                         type="number"
-                        id="qtdVertices"
-                        name="qtdVertices"
-                        value={qtdVertices}
+                        id="order"
+                        name="order"
+                        value={order}
                         onChange={(e) => {
-                            setQtdVertices(Number(e.target.value))
+                            setOrder(Number(e.target.value))
                         }}
                     />
                 </div>
