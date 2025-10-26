@@ -12,4 +12,6 @@ export interface Graph {
     class?: "completes"
 }
 
-export interface GraphValues extends Partial<Graph> {}
+export interface GraphValues extends Graph {
+    renderigs?: number
+}
