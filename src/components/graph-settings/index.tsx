@@ -33,7 +33,7 @@ export default function GraphSettings({
             drag
             dragConstraints={dragConstraintRef}
             className={
-                `absolute left-10 top-10 z-10`
+                `absolute left-5 top-5 z-10`
             }
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
