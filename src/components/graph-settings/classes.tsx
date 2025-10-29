@@ -9,14 +9,17 @@ import {
     getCycleGraphMatrix,
     getCycleGraphTotalColoring,
     getPathGraphMatrix,
-    getPathGraphTotalColoring
+    getPathGraphTotalColoring,
+    matrixToGraph6
 } from "@/lib/graphs";
 import { useGraph } from "@/contexts/GraphContext";
+import { Download } from "lucide-react";
 
 export default function ClassesSettings() {
     const { updateGraph } = useGraph();
     const [graphClass, setGraphClass] = useState('');
     const [order, setOrder] = useState(3);
+    const [fileG6, setFileG6] = useState<Blob>();
 
     const handleSubmit: FormEventHandler = (e) => {
         e.preventDefault();
@@ -24,6 +27,8 @@ export default function ClassesSettings() {
         if (graphClass === 'completes') {
             const matrix = getCompleteGraphMatrix(order);
             const totalColoring = getCompleteGraphTotalColoring(order);
+            const blob = new Blob([matrixToGraph6(matrix)]);
+            setFileG6(blob);
 
             updateGraph({
                 matrix,
@@ -34,6 +39,8 @@ export default function ClassesSettings() {
         } else if (graphClass === 'paths') {
             const matrix = getPathGraphMatrix(order);
             const totalColoring = getPathGraphTotalColoring(order);
+            const blob = new Blob([matrixToGraph6(matrix)]);
+            setFileG6(blob);
 
             updateGraph({
                 matrix,
@@ -44,6 +51,8 @@ export default function ClassesSettings() {
         } else if (graphClass === 'cycles') {
             const matrix = getCycleGraphMatrix(order);
             const totalColoring = getCycleGraphTotalColoring(order);
+            const blob = new Blob([matrixToGraph6(matrix)]);
+            setFileG6(blob);
 
             updateGraph({
                 matrix,
@@ -99,6 +108,19 @@ export default function ClassesSettings() {
             </section>
 
             <Button disabled={!graphClass}>Gerar Grafo</Button>
+
+            <Button
+                variant="outline"
+                className={`${!fileG6 && 'hidden'}`}
+            >
+                <Download />
+                <a
+                    download={`${graphClass}-${order}.g6`}
+                    href={fileG6 && URL.createObjectURL(fileG6)}
+                >
+                    Baixar em graph6
+                </a>
+            </Button>
         </form>
     );
 }

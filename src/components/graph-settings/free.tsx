@@ -4,13 +4,15 @@ import { Button } from "../ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { useGraph } from "@/contexts/GraphContext";
 import { GraphFile } from "@/types";
-import { getGraphMatrix } from "@/lib/graphs";
+import { getGraphMatrix, matrixToGraph6 } from "@/lib/graphs";
+import { Download } from "lucide-react";
 
 export default function FreeSettings() {
     const { updateGraph } = useGraph();
     const [files, setFiles] = useState<File[]>();
     const [graphFile, setGraphFile] = useState<GraphFile>();
     const [layout, setLayout] = useState<string>();
+    const [fileG6, setFileG6] = useState<Blob>();
 
     const handleDrop = (newFiles: File[]) => {
         setFiles(newFiles);
@@ -23,11 +25,13 @@ export default function FreeSettings() {
 
                 if (isG6.test(newFiles[0].name)) {
                     setGraphFile({
+                        name: newFiles[0].name.replace(/\.g6$/g, ''),
                         type: 'g6',
                         text: reader.result.split(/\s+/g)[0]
                     });
                 } else {
                     setGraphFile({
+                        name: newFiles[0].name.replace(/\.txt$/g, ''),
                         type: 'txt',
                         text: reader.result
                     });
@@ -43,6 +47,8 @@ export default function FreeSettings() {
 
         if (graphFile) {
             const matrix = getGraphMatrix(graphFile);
+            const blob = new Blob([matrixToGraph6(matrix)]);
+            setFileG6(blob);
     
             updateGraph({
                 file: graphFile,
@@ -105,6 +111,19 @@ export default function FreeSettings() {
             </section>
 
             <Button disabled={!graphFile}>Gerar Grafo</Button>
+
+            <Button
+                variant="outline"
+                className={`${!fileG6 && 'hidden'}`}
+            >
+                <Download />
+                <a
+                    download={`${graphFile?.name}.g6`}
+                    href={fileG6 && URL.createObjectURL(fileG6)}
+                >
+                    Baixar em graph6
+                </a>
+            </Button>
         </form>
     );
 }

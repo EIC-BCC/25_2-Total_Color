@@ -1,4 +1,5 @@
 export type GraphFile = {
+    name: string,
     type: 'g6' | 'txt',
     text: string
 }
