@@ -4,10 +4,11 @@ import { WritingText } from "../ui/shadcn-io/writing-text";
 import { assignColorNumber, generateVisualization, showColoring } from "./visualization";
 import { useGraph } from "@/contexts/GraphContext";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { Button } from "../ui/button";
 
 export default function GraphVisualization() {
     const { graph } = useGraph();
-    const cyContainerRef = useRef<HTMLElement | null>(null);
+    const cyContainerRef = useRef<HTMLDivElement | null>(null);
     const [coloring, setColoring] = useState<Map<string, string[]>>(new Map());
     const colors = Array.from(coloring.keys());
 
@@ -53,97 +54,101 @@ export default function GraphVisualization() {
         }
     }, [graph.renderings]);
     
-
     return (
-        <>
-            {
-                Boolean(graph.matrix) ||
-                <section
-                    className="flex h-full items-center justify-center p-4 w-full"
-                >
+        <motion.section
+            className="bg-gray-200 flex flex-col grow items-center justify-center"
+        >
+
+            <div ref={cyContainerRef} className={`h-full w-full ${!graph.matrix && 'hidden'}`}></div>
+
+            <motion.div
+                className={`flex flex-col gap-24 ${graph.matrix && 'hidden'}`}
+            >
+                <motion.div>
                     <WritingText
                         text="Bem-vindo(a) ao Total-Color 😎"
-                        className="text-4xl text-white select-none"
+                        className="text-2xl lg:text-4xl select-none"
                         inView={true}
                         spacing=".5rem"
                         transition={{
                             type: "spring",
-                            bounce: 0,
+                            bounce: 0.5,
                             duration: 2,
-                            delay: 0.2
+                            delay: .5
                         }}
                     />
-                </section>                    
-            }
+                </motion.div>
 
-            <motion.section
-                ref={cyContainerRef}
-                className="h-full w-full"
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: .7 }}
-            />
-
-            {
-                colors.length > 0 &&
-                <motion.section
+                <motion.div
+                    className="flex flex-col gap-5"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5 }}
+                    transition={{ duration: 2, delay: 3 }}
                 >
-                    <Card className="absolute bottom-5 left-5 z-10 w-full max-w-sm">
-                        <CardHeader>
-                            <CardTitle>
-                                Coloração Total
-                            </CardTitle>
-                        </CardHeader>
+                    <Button>Iniciar com uma classe</Button>
+                    <Button>Iniciar no modo livre</Button>
+                </motion.div>
 
-                        <CardContent className="flex flex-col gap-2">
-                            {
-                                (graph.class && graph.totalColoring) &&    
-                                <div className="flex gap-2">
-                                    <span>Número cromático total:</span>
-                                    <motion.span
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        transition={{ duration: 1 }}
-                                    >
-                                        {graph.totalColoring.length}
-                                    </motion.span>
-                                </div>
-                            }
-
-                            <div className="flex flex-col gap-2">
-                                <span>Coloração:</span>
-                                <div className="flex flex-col gap-2">
-                                    {[...coloring].map(([color, elementsIds]) => (
-                                        <div key={color} className="flex gap-2 pl-4">
-                                            <motion.span
-                                                initial={{ opacity: 0 }}
-                                                animate={{ opacity: 1 }}
-                                                transition={{ duration: 1 }}
-                                            >
-                                                {`${color} --> `}
-                                            </motion.span>
-
-                                            {elementsIds.map((elementId) => (
-                                                <motion.span
-                                                    key={elementId}
-                                                    initial={{ opacity: 0 }}
-                                                    animate={{ opacity: 1 }}
-                                                    transition={{ duration: 1 }}
-                                                >
-                                                    {elementId}
-                                                </motion.span>
-                                            ))}
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </CardContent>
-                    </Card>
-                </motion.section>
-            }
-        </>
+            </motion.div>
+        </motion.section>
     );
+
+    // colors.length > 0 &&
+    // <motion.section
+    //     initial={{ opacity: 0 }}
+    //     animate={{ opacity: 1 }}
+    //     transition={{ duration: 0.5 }}
+    // >
+    //     <Card className="absolute bottom-5 left-5 z-10 w-full max-w-sm">
+    //         <CardHeader>
+    //             <CardTitle>
+    //                 Coloração Total
+    //             </CardTitle>
+    //         </CardHeader>
+
+    //         <CardContent className="flex flex-col gap-2">
+    //             {
+    //                 (graph.class && graph.totalColoring) &&    
+    //                 <div className="flex gap-2">
+    //                     <span>Número cromático total:</span>
+    //                     <motion.span
+    //                         initial={{ opacity: 0 }}
+    //                         animate={{ opacity: 1 }}
+    //                         transition={{ duration: 1 }}
+    //                     >
+    //                         {graph.totalColoring.length}
+    //                     </motion.span>
+    //                 </div>
+    //             }
+
+    //             <div className="flex flex-col gap-2">
+    //                 <span>Coloração:</span>
+    //                 <div className="flex flex-col gap-2">
+    //                     {[...coloring].map(([color, elementsIds]) => (
+    //                         <div key={color} className="flex gap-2 pl-4">
+    //                             <motion.span
+    //                                 initial={{ opacity: 0 }}
+    //                                 animate={{ opacity: 1 }}
+    //                                 transition={{ duration: 1 }}
+    //                             >
+    //                                 {`${color} --> `}
+    //                             </motion.span>
+
+    //                             {elementsIds.map((elementId) => (
+    //                                 <motion.span
+    //                                     key={elementId}
+    //                                     initial={{ opacity: 0 }}
+    //                                     animate={{ opacity: 1 }}
+    //                                     transition={{ duration: 1 }}
+    //                                 >
+    //                                     {elementId}
+    //                                 </motion.span>
+    //                             ))}
+    //                         </div>
+    //                     ))}
+    //                 </div>
+    //             </div>
+    //         </CardContent>
+    //     </Card>
+    // </motion.section>
 }

@@ -75,7 +75,7 @@ export default function ClassesSettings() {
 
                 <div className="flex gap-4">
                     <Select value={graphClass} onValueChange={setGraphClass}>
-                        <SelectTrigger className="w-[180px]">
+                        <SelectTrigger className="w-full">
                             <SelectValue placeholder="Selecione uma classe" />
                         </SelectTrigger>                    
                         <SelectContent>

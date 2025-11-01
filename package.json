@@ -20,7 +20,7 @@
     "cytoscape": "^3.33.1",
     "lodash.debounce": "^4.0.8",
     "lucide-react": "^0.542.0",
-    "motion": "^12.23.12",
+    "motion": "^12.23.24",
     "next": "^15.5.2",
     "react": "19.1.0",
     "react-dom": "19.1.0",

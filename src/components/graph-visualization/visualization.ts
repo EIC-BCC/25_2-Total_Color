@@ -3,7 +3,9 @@ import { Graph } from "@/types";
 import cytoscape, { Core, ElementsDefinition, EventObject, SingularElementArgument } from "cytoscape";
 import { RefObject } from "react";
 
-const generateVisualization = (graph: Graph, containerRef: RefObject<HTMLElement | null>): Core | null => {
+const generateVisualization = (graph: Graph, containerRef: RefObject<HTMLDivElement | null>): Core | null => {
+    const baseColor = '#526D82';
+
     if (graph.matrix) {
         const cy = cytoscape({
             container: containerRef.current,
@@ -12,28 +14,34 @@ const generateVisualization = (graph: Graph, containerRef: RefObject<HTMLElement
                 {
                     selector: '*',
                     style: {
+                        'color': baseColor,
+                        'font-size': '16px',
                         'transition-duration': 1
                     }
                 },
                 {
                     selector: 'node',
                     style: {
-                        'background-color': '#526D82',
-                        'color': '#FFF',
-                        'font-size': '22px',
+                        'background-color': '#FFF',
+                        'border-color': baseColor,
+                        'border-width': 2,
                         'font-weight': 'lighter',
-                        'height': '50px',
+                        'height': '40px',
                         'label': 'data(id)',
                         'text-valign': 'center',
-                        'width': '50px'
+                        'width': '40px'
                     }
                 },
                 {
                     selector: 'edge',
                     style: {
-                        'color': '#FFF',
-                        'font-size': '22px',
-                        'line-color': '#526D82',
+                        'line-color': baseColor,
+                        'text-background-color': '#FFF',
+                        'text-background-padding': '5px',
+                        'text-background-opacity': 1,
+                        'text-border-color': baseColor,
+                        'text-border-opacity': 1,
+                        'text-border-width': 2,
                         'width': 5
                     }
                 },
@@ -62,7 +70,7 @@ const generateVisualization = (graph: Graph, containerRef: RefObject<HTMLElement
                 }
             ],
             layout: {
-                name: graph.layout || 'null'
+                name: graph.layout || 'circle',
             }
         });
     
@@ -209,8 +217,10 @@ const showColoring = (
     
                     element.data('colorNumber', colorNumber);
                     element.style('label', element.data('colorNumber'));
-                    element.style('background-color', colors[color % colors.length]);
+                    element.style('color', colors[color % colors.length]);
+                    element.style('border-color', colors[color % colors.length]);
                     element.style('line-color', colors[color % colors.length]);
+                    element.style('text-border-color', colors[color % colors.length]);
                     //element.addClass('highlated');
     
                     // setTimeout(() => {
@@ -240,8 +250,10 @@ const showColoring = (
         
                         element.data('colorNumber', colorNumber);
                         element.style('label', element.data('colorNumber'));
-                        element.style('background-color', colors[colorIndex % colors.length]);
+                        element.style('color', colors[colorIndex % colors.length]);
+                        element.style('border-color', colors[colorIndex % colors.length]);
                         element.style('line-color', colors[colorIndex % colors.length]);
+                        element.style('text-border-color', colors[colorIndex % colors.length]);
                         // element.addClass('highlated');
         
                         // setTimeout(() => {

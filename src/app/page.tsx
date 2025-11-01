@@ -1,17 +1,14 @@
 "use client"
-import { useRef } from "react";
-import GraphSettings from "@/components/graph-settings";
 import GraphVisualization from "@/components/graph-visualization";
 import { GraphProvider } from "@/contexts/GraphContext";
+import AppBar from "@/components/appbar";
 
 export default function Home() {
-    const dragConstraintRef = useRef<HTMLElement | null>(null);
-
     return (
-        <main ref={dragConstraintRef} className="bg-gray-700 h-screen overflow-hidden w-screen">
+        <main className="flex flex-col h-screen w-screen">
             <GraphProvider>
-                <GraphSettings dragConstraintRef={dragConstraintRef} />
                 <GraphVisualization />
+                <AppBar />
             </GraphProvider>
         </main>
     );
