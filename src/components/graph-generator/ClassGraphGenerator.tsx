@@ -16,7 +16,7 @@ import { useGraph } from "@/contexts/GraphContext";
 import { Download } from "lucide-react";
 import { layouts } from ".";
 
-export default function ClassesSettings() {
+export default function ClassGraphGenerator() {
     const { updateGraph } = useGraph();
     const [graphClass, setGraphClass] = useState('');
     const [order, setOrder] = useState(3);

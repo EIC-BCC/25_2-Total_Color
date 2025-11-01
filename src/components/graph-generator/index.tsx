@@ -2,8 +2,8 @@
 import { ReactNode } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
 import { Tabs, TabsContent, TabsContents, TabsList, TabsTrigger } from "../ui/shadcn-io/tabs";
-import ClassesSettings from "./classes";
-import FreeSettings from "./free";
+import ClassGraphGenerator from "./ClassGraphGenerator";
+import FreeGraphGenerator from "./FreeGraphGenerator";
 
 export const layouts = [
     { value: 'random', label: 'Aleatório' },
@@ -15,16 +15,16 @@ const tabs = [
     {
         value: 'classes',
         name: 'Classes',
-        content: <ClassesSettings />
+        content: <ClassGraphGenerator />
     },
     {
         value: 'free',
         name: 'Livre',
-        content: <FreeSettings />
+        content: <FreeGraphGenerator />
     }
 ];
 
-export default function GraphSettings({
+export default function GraphGenerator({
     children
 }: { children: ReactNode }) {
 

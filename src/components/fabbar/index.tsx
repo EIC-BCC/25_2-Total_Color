@@ -1,5 +1,5 @@
 import { PlusIcon, PyramidIcon } from "lucide-react";
-import GraphSettings from "../graph-settings";
+import GraphSettings from "../graph-generator";
 import { motion } from "motion/react";
 
 export default function FabBar() {

@@ -1,5 +1,5 @@
 "use client"
-import GraphVisualization from "@/components/graph-visualization";
+import GraphVisualization from "@/components/graph-viewer";
 import { GraphProvider } from "@/contexts/GraphContext";
 import AppBar from "@/components/appbar";
 import FabBar from "@/components/fabbar";
