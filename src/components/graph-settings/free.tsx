@@ -6,6 +6,7 @@ import { useGraph } from "@/contexts/GraphContext";
 import { GraphFile } from "@/types";
 import { getGraphMatrix, matrixToGraph6 } from "@/lib/graphs";
 import { Download } from "lucide-react";
+import { layouts } from ".";
 
 export default function FreeSettings() {
     const { updateGraph } = useGraph();
@@ -53,7 +54,7 @@ export default function FreeSettings() {
             updateGraph({
                 file: graphFile,
                 matrix,
-                layout: layout ?? 'grid'
+                layout
             });
         }
     };
@@ -98,12 +99,11 @@ export default function FreeSettings() {
                                 <SelectValue placeholder="Selecione um layout" />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="random">Random</SelectItem>
-                                <SelectItem value="grid">Grid</SelectItem>
-                                <SelectItem value="circle">Circle</SelectItem>
-                                <SelectItem value="concentric">Concentric</SelectItem>
-                                <SelectItem value="breadthfirst">Breadthfirst</SelectItem>
-                                <SelectItem value="cose">Cose</SelectItem>
+                                {layouts.map((layout) => (
+                                    <SelectItem key={layout.value} value={layout.value}>
+                                        {layout.label}
+                                    </SelectItem>
+                                ))}
                             </SelectContent>
                         </Select>
                     </div>

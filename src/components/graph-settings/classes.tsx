@@ -14,12 +14,14 @@ import {
 } from "@/lib/graphs";
 import { useGraph } from "@/contexts/GraphContext";
 import { Download } from "lucide-react";
+import { layouts } from ".";
 
 export default function ClassesSettings() {
     const { updateGraph } = useGraph();
     const [graphClass, setGraphClass] = useState('');
     const [order, setOrder] = useState(3);
     const [fileG6, setFileG6] = useState<Blob>();
+    const [layout, setLayout] = useState<string>();
 
     const handleSubmit: FormEventHandler = (e) => {
         e.preventDefault();
@@ -33,7 +35,7 @@ export default function ClassesSettings() {
             updateGraph({
                 matrix,
                 totalColoring,
-                layout: 'circle',
+                layout,
                 class: graphClass
             });
         } else if (graphClass === 'paths') {
@@ -45,7 +47,7 @@ export default function ClassesSettings() {
             updateGraph({
                 matrix,
                 totalColoring,
-                layout: 'breadthfirst',
+                layout,
                 class: graphClass
             });
         } else if (graphClass === 'cycles') {
@@ -57,7 +59,7 @@ export default function ClassesSettings() {
             updateGraph({
                 matrix,
                 totalColoring,
-                layout: 'circle',
+                layout,
                 class: graphClass
             });
         }
@@ -74,7 +76,13 @@ export default function ClassesSettings() {
                 </h2>
 
                 <div className="flex gap-4">
-                    <Select value={graphClass} onValueChange={setGraphClass}>
+                    <Select
+                        value={graphClass}
+                        onValueChange={(value) => {
+                            setGraphClass(value);
+                            setLayout(value === 'paths' ? 'grid' : 'circle');
+                        }}
+                    >
                         <SelectTrigger className="w-full">
                             <SelectValue placeholder="Selecione uma classe" />
                         </SelectTrigger>                    
@@ -106,6 +114,27 @@ export default function ClassesSettings() {
                     />
                 </div>
             </section>
+
+            <section className={`${graphClass ? 'flex flex-col gap-4' : 'hidden'}`}>
+                <h2 className="border-b-2 border-b-gray-500 font-bold">
+                    Layout
+                </h2>
+
+                <div className="flex gap-4">
+                    <Select value={layout} onValueChange={setLayout}>
+                        <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Selecione um layout" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {layouts.map((layout) => (
+                                <SelectItem key={layout.value} value={layout.value}>
+                                    {layout.label}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
+                </div>
+            </section>            
 
             <Button disabled={!graphClass}>Gerar Grafo</Button>
 
