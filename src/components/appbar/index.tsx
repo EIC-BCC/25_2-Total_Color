@@ -21,7 +21,7 @@ export default function AppBar() {
                     </DialogHeader>
 
                     <section className="flex flex-col gap-2">
-                        <p>Sistema produto do TCC "Total-color: uma aplicação web para coloração total em grafos" por Renan Carvalho.</p>
+                        <p>Sistema produto do TCC &quot;Total-color: uma aplicação web para coloração total em grafos&quot; por Renan Carvalho.</p>
 
                         <div>
                             <p>Orientadores:</p>

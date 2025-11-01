@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { WritingText } from "../ui/shadcn-io/writing-text";
 import { assignColorNumber, generateVisualization, showColoring } from "./visualization";
 import { useGraph } from "@/contexts/GraphContext";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+// import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
 import GraphGenerator from "../graph-generator";
 

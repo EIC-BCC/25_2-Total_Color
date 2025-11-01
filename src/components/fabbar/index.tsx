@@ -1,7 +1,6 @@
 import { DownloadIcon, LoaderCircleIcon, PlusIcon, PyramidIcon } from "lucide-react";
 import { motion } from "motion/react";
 import GraphGenerator from "../graph-generator";
-import { Button } from "../ui/button";
 import { useGraph } from "@/contexts/GraphContext";
 import { useEffect, useState } from "react";
 import { matrixToGraph6 } from "@/lib/graphs";
