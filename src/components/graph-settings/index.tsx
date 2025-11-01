@@ -5,6 +5,12 @@ import { Tabs, TabsContent, TabsContents, TabsList, TabsTrigger } from "../ui/sh
 import ClassesSettings from "./classes";
 import FreeSettings from "./free";
 
+export const layouts = [
+    { value: 'random', label: 'Aleatório' },
+    { value: 'grid', label: 'Grade' },
+    { value: 'circle', label: 'Circular' }
+];
+
 const tabs = [
     {
         value: 'classes',
@@ -42,7 +48,7 @@ export default function GraphSettings({
                         ))}
                     </TabsList>
 
-                    <TabsContents className="bg-background">
+                    <TabsContents>
                         {tabs.map((tab) => (
                             <TabsContent key={tab.value} value={tab.value} className="">
                                 {tab.content}
