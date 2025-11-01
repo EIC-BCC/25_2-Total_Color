@@ -4,8 +4,7 @@ import { Button } from "../ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { useGraph } from "@/contexts/GraphContext";
 import { GraphFile } from "@/types";
-import { getGraphMatrix, matrixToGraph6 } from "@/lib/graphs";
-import { Download } from "lucide-react";
+import { getGraphMatrix } from "@/lib/graphs";
 import { layouts } from ".";
 
 interface FreeGraphGeneratorProps {
@@ -19,7 +18,6 @@ export default function FreeGraphGenerator({
     const [files, setFiles] = useState<File[]>();
     const [graphFile, setGraphFile] = useState<GraphFile>();
     const [layout, setLayout] = useState<string>();
-    const [fileG6, setFileG6] = useState<Blob>();
 
     const handleDrop = (newFiles: File[]) => {
         setFiles(newFiles);
@@ -54,13 +52,12 @@ export default function FreeGraphGenerator({
 
         if (graphFile) {
             const matrix = getGraphMatrix(graphFile);
-            const blob = new Blob([matrixToGraph6(matrix)]);
-            setFileG6(blob);
     
             updateGraph({
                 file: graphFile,
                 matrix,
-                layout
+                layout,
+                fileName: graphFile.name
             });
         }
 
@@ -119,19 +116,6 @@ export default function FreeGraphGenerator({
             </section>
 
             <Button disabled={!graphFile}>Gerar Grafo</Button>
-
-            <Button
-                variant="outline"
-                className={`${!fileG6 && 'hidden'}`}
-            >
-                <Download />
-                <a
-                    download={`${graphFile?.name}.g6`}
-                    href={fileG6 && URL.createObjectURL(fileG6)}
-                >
-                    Baixar em graph6
-                </a>
-            </Button>
         </form>
     );
 }

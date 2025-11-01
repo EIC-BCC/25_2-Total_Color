@@ -10,7 +10,8 @@ export interface Graph {
     totalColoring?: string[][],
     layout?: string,
     renderings: number,
-    class?: "completes" | "paths" | "cycles"
+    class?: "completes" | "paths" | "cycles",
+    fileName?: string
 }
 
 export interface GraphValues {
@@ -19,5 +20,6 @@ export interface GraphValues {
     totalColoring?: string[][],
     layout?: string,
     renderings?: number,
-    class?: "completes" | "paths" | "cycles"
+    class?: "completes" | "paths" | "cycles",
+    fileName?: string
 }

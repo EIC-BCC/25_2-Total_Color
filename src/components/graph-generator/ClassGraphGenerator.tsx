@@ -9,11 +9,9 @@ import {
     getCycleGraphMatrix,
     getCycleGraphTotalColoring,
     getPathGraphMatrix,
-    getPathGraphTotalColoring,
-    matrixToGraph6
+    getPathGraphTotalColoring
 } from "@/lib/graphs";
 import { useGraph } from "@/contexts/GraphContext";
-import { Download } from "lucide-react";
 import { layouts } from ".";
 
 interface ClassGraphGeneratorProps {
@@ -26,7 +24,6 @@ export default function ClassGraphGenerator({
     const { updateGraph } = useGraph();
     const [graphClass, setGraphClass] = useState('');
     const [order, setOrder] = useState(3);
-    const [fileG6, setFileG6] = useState<Blob>();
     const [layout, setLayout] = useState<string>();
 
     const handleSubmit: FormEventHandler = (e) => {
@@ -35,38 +32,35 @@ export default function ClassGraphGenerator({
         if (graphClass === 'completes') {
             const matrix = getCompleteGraphMatrix(order);
             const totalColoring = getCompleteGraphTotalColoring(order);
-            const blob = new Blob([matrixToGraph6(matrix)]);
-            setFileG6(blob);
 
             updateGraph({
                 matrix,
                 totalColoring,
                 layout,
-                class: graphClass
+                class: graphClass,
+                fileName: `${graphClass}-${order}`
             });
         } else if (graphClass === 'paths') {
             const matrix = getPathGraphMatrix(order);
             const totalColoring = getPathGraphTotalColoring(order);
-            const blob = new Blob([matrixToGraph6(matrix)]);
-            setFileG6(blob);
 
             updateGraph({
                 matrix,
                 totalColoring,
                 layout,
-                class: graphClass
+                class: graphClass,
+                fileName: `${graphClass}-${order}`
             });
         } else if (graphClass === 'cycles') {
             const matrix = getCycleGraphMatrix(order);
             const totalColoring = getCycleGraphTotalColoring(order);
-            const blob = new Blob([matrixToGraph6(matrix)]);
-            setFileG6(blob);
 
             updateGraph({
                 matrix,
                 totalColoring,
                 layout,
-                class: graphClass
+                class: graphClass,
+                fileName: `${graphClass}-${order}`
             });
         }
 
@@ -145,19 +139,6 @@ export default function ClassGraphGenerator({
             </section>            
 
             <Button disabled={!graphClass}>Gerar Grafo</Button>
-
-            <Button
-                variant="outline"
-                className={`${!fileG6 && 'hidden'}`}
-            >
-                <Download />
-                <a
-                    download={`${graphClass}-${order}.g6`}
-                    href={fileG6 && URL.createObjectURL(fileG6)}
-                >
-                    Baixar em graph6
-                </a>
-            </Button>
         </form>
     );
 }
