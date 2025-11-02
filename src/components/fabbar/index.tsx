@@ -31,16 +31,19 @@ export default function FabBar() {
                         animate={{ opacity: 1 }}
                         transition={{ duration: 1, delay: 1 }}
                     >
-                        <div
-                            className="border border-gray-200 bg-white cursor-pointer flex gap-2 hover:opacity-60 p-2 rounded duration-300 w-auto"
-                            onClick={() => updateGraph({ showColoring: true })}
-                        >
-                            <div className="flex">
-                                <PaletteIcon />
-                            </div>
+                        {
+                            graph.class &&
+                            <div
+                                className="border border-gray-200 bg-white cursor-pointer flex gap-2 hover:opacity-60 p-2 rounded duration-300 w-auto"
+                                onClick={() => updateGraph({ showColoring: true })}
+                            >
+                                <div className="flex">
+                                    <PaletteIcon />
+                                </div>
 
-                            Apresentar Coloração
-                        </div>
+                                Apresentar Coloração
+                            </div>
+                        }
 
                         <div className="border border-gray-200 bg-white cursor-pointer flex gap-2 hover:opacity-60 p-2 rounded duration-300 w-auto">
                             <div className="flex">

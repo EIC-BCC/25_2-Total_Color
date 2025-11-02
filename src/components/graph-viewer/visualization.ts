@@ -188,7 +188,7 @@ const convertToElementId = (elementLabel: string): string => {
     return elementId;
 }
 
-const colors = [
+export const colors = [
     '#eb3b5a',
     '#3867d6',
     '#fa8231',

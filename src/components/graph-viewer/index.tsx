@@ -3,10 +3,11 @@ import { useEffect, useRef, useState } from "react";
 import { WritingText } from "../ui/shadcn-io/writing-text";
 import { assignColorNumber, generateVisualization, showColoring } from "./visualization";
 import { useGraph } from "@/contexts/GraphContext";
-// import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { Card, CardContent } from "../ui/card";
 import { Button } from "../ui/button";
 import GraphGenerator from "../graph-generator";
 import { Core } from "cytoscape";
+import { colors as colorsHex } from "./visualization";
 
 export default function GraphViewer() {
     const { graph } = useGraph();
@@ -62,7 +63,7 @@ export default function GraphViewer() {
     
     return (
         <motion.section
-            className="bg-background flex flex-col grow items-center justify-center"
+            className="bg-background flex flex-col grow items-center justify-center relative"
         >
 
             <div ref={cyContainerRef} className={`h-full w-full ${!graph.matrix && 'hidden'}`}></div>
@@ -101,65 +102,49 @@ export default function GraphViewer() {
                 </motion.div>
 
             </motion.div>
+
+            {graph.matrix &&
+                <motion.section
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                >
+                    <Card className="absolute left-10 max-w-sm top-10 z-10">
+                        <CardContent className="flex flex-col gap-2 text-lg">
+                            {
+                                (graph.class && graph.totalColoring) &&
+                                <div className="flex gap-2">
+                                    <span>Número cromático total:</span>
+                                    <motion.span
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        transition={{ duration: 1 }}
+                                    >
+                                        {graph.totalColoring.length}
+                                    </motion.span>
+                                </div>
+                            }
+
+                            <div className="flex flex-col gap-2">
+                                <span>Cores utilizadas: {colors.length}</span>
+                                <div className="flex gap-2">
+                                    {colors.map((color, index) => (
+                                        <span
+                                            key={color}
+                                            style={{
+                                                color: colorsHex[index % colorsHex.length]
+                                            }}
+                                        >
+                                            {color}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        </CardContent>
+                    </Card>
+                </motion.section>
+            }
         </motion.section>
     );
 
-    // colors.length > 0 &&
-    // <motion.section
-    //     initial={{ opacity: 0 }}
-    //     animate={{ opacity: 1 }}
-    //     transition={{ duration: 0.5 }}
-    // >
-    //     <Card className="absolute bottom-5 left-5 z-10 w-full max-w-sm">
-    //         <CardHeader>
-    //             <CardTitle>
-    //                 Coloração Total
-    //             </CardTitle>
-    //         </CardHeader>
-
-    //         <CardContent className="flex flex-col gap-2">
-    //             {
-    //                 (graph.class && graph.totalColoring) &&    
-    //                 <div className="flex gap-2">
-    //                     <span>Número cromático total:</span>
-    //                     <motion.span
-    //                         initial={{ opacity: 0 }}
-    //                         animate={{ opacity: 1 }}
-    //                         transition={{ duration: 1 }}
-    //                     >
-    //                         {graph.totalColoring.length}
-    //                     </motion.span>
-    //                 </div>
-    //             }
-
-    //             <div className="flex flex-col gap-2">
-    //                 <span>Coloração:</span>
-    //                 <div className="flex flex-col gap-2">
-    //                     {[...coloring].map(([color, elementsIds]) => (
-    //                         <div key={color} className="flex gap-2 pl-4">
-    //                             <motion.span
-    //                                 initial={{ opacity: 0 }}
-    //                                 animate={{ opacity: 1 }}
-    //                                 transition={{ duration: 1 }}
-    //                             >
-    //                                 {`${color} --> `}
-    //                             </motion.span>
-
-    //                             {elementsIds.map((elementId) => (
-    //                                 <motion.span
-    //                                     key={elementId}
-    //                                     initial={{ opacity: 0 }}
-    //                                     animate={{ opacity: 1 }}
-    //                                     transition={{ duration: 1 }}
-    //                                 >
-    //                                     {elementId}
-    //                                 </motion.span>
-    //                             ))}
-    //                         </div>
-    //                     ))}
-    //                 </div>
-    //             </div>
-    //         </CardContent>
-    //     </Card>
-    // </motion.section>
 }
