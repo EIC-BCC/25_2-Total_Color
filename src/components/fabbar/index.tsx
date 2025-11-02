@@ -18,14 +18,30 @@ export default function FabBar() {
 
     return (
         <motion.menu
-            className="bottom-0 fixed flex gap-10 items-center justify-between p-8 w-screen z-10"
+            className="bottom-0 fixed flex items-center justify-between p-8 w-screen z-10"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 3 }}
         >
             {
                 graph.matrix ?
-                    <>
+                    <motion.section
+                        className="flex flex-col gap-5"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 1, delay: 1 }}
+                    >
+                        <div
+                            className="border border-gray-200 bg-white cursor-pointer flex gap-2 hover:opacity-60 p-2 rounded duration-300 w-auto"
+                            onClick={() => updateGraph({ showColoring: true })}
+                        >
+                            <div className="flex">
+                                <PaletteIcon />
+                            </div>
+
+                            Apresentar Coloração
+                        </div>
+
                         <div className="border border-gray-200 bg-white cursor-pointer flex gap-2 hover:opacity-60 p-2 rounded duration-300 w-auto">
                             <div className="flex">
                                 {graph6File ? <DownloadIcon /> : <LoaderCircleIcon className="animate-spin" />}
@@ -37,18 +53,7 @@ export default function FabBar() {
                                 Baixar em graph6
                             </a>
                         </div>
-
-                        <div
-                            className="border border-gray-200 bg-white cursor-pointer flex gap-2 hover:opacity-60 p-2 rounded duration-300 w-auto"
-                            onClick={() => updateGraph({ showColoring: true })}
-                        >
-                            <div className="flex">
-                                <PaletteIcon />
-                            </div>
-
-                            Apresentar Coloração
-                        </div>
-                    </>
+                    </motion.section>
                     :
                     <div></div>
             }
