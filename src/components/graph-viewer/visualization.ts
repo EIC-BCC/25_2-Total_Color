@@ -210,28 +210,32 @@ const showColoring = (
 ) => {
     let counter = 0;
 
+    const showColor = (color: number, elementLabel: string) => {
+        setTimeout(() => {
+            const element = cy.$id(convertToElementId(elementLabel));
+            const previousColor = element.data('colorNumber');
+            const currentColor = String(color + 1);
+
+            element.data('colorNumber', currentColor);
+            element.style('label', element.data('colorNumber'));
+            element.style('color', colors[color % colors.length]);
+            element.style('border-color', colors[color % colors.length]);
+            element.style('line-color', colors[color % colors.length]);
+            element.style('text-border-color', colors[color % colors.length]);
+
+            updateColor(element.data('id'), previousColor, currentColor);
+        }, 1500 * counter);
+
+        counter++;
+    };
+
     if (orientation === 'color') {
-        totalColoring?.forEach((elementsLabels, color) => {
+        totalColoring.forEach((elementsLabels, color) => {
             elementsLabels.forEach((elementLabel) => {
-                setTimeout(() => {
-                    const element = cy.$id(convertToElementId(elementLabel));
-                    const previousColor = element.data('colorNumber');
-                    const currentColor = String(color + 1);
-    
-                    element.data('colorNumber', currentColor);
-                    element.style('label', element.data('colorNumber'));
-                    element.style('color', colors[color % colors.length]);
-                    element.style('border-color', colors[color % colors.length]);
-                    element.style('line-color', colors[color % colors.length]);
-                    element.style('text-border-color', colors[color % colors.length]);
-    
-                    updateColor(element.data('id'), previousColor, currentColor);
-                }, 1500 * counter);
-    
-                counter++;
+                showColor(color, elementLabel);
             });
         });
-    } else {
+    } else if (orientation === 'index') {
         const maxElementsLabels = totalColoring.reduce((prev, curr) => (
             prev.length > curr.length ? prev : curr
         ));
@@ -242,22 +246,7 @@ const showColoring = (
         for (let elementIndex = 0; elementIndex <= maxElementIndex; elementIndex++) {
             for (let colorIndex = 0; colorIndex <= maxColorIndex; colorIndex++) {
                 if (elementIndex < totalColoring[colorIndex].length) {
-                    setTimeout(() => {
-                        const element = cy.$id(convertToElementId(totalColoring[colorIndex][elementIndex]));
-                        const previousColor = element.data('colorNumber');
-                        const currentColor = String(colorIndex + 1);
-        
-                        element.data('colorNumber', currentColor);
-                        element.style('label', element.data('colorNumber'));
-                        element.style('color', colors[colorIndex % colors.length]);
-                        element.style('border-color', colors[colorIndex % colors.length]);
-                        element.style('line-color', colors[colorIndex % colors.length]);
-                        element.style('text-border-color', colors[colorIndex % colors.length]);
-        
-                        updateColor(element.data('id'), previousColor, currentColor);
-                    }, 1500 * counter);
-        
-                    counter++;
+                    showColor(colorIndex, totalColoring[colorIndex][elementIndex]);
                 }
             }
         }
