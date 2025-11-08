@@ -14,14 +14,3 @@ export interface Graph {
     class?: "completes" | "paths" | "cycles",
     fileName?: string
 }
-
-export interface GraphValues {
-    file?: GraphFile,
-    matrix?: number[][],
-    totalColoring?: string[][],
-    showColoring?: boolean,
-    layout?: string,
-    renderings?: number,
-    class?: "completes" | "paths" | "cycles",
-    fileName?: string
-}
