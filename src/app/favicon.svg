@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" xmlns:bx="https://boxy-svg.com">
+  <ellipse style="fill: rgb(75, 115, 255);" cx="74.14" cy="82.876" rx="31.576" ry="31.576"/>
+  <ellipse style="fill: rgb(75, 115, 255);" cx="241.23" cy="83.511" rx="31.576" ry="31.576"/>
+  <ellipse style="fill: rgb(75, 115, 255);" cx="414.674" cy="84.147" rx="31.576" ry="31.576"/>
+  <ellipse style="fill: rgb(75, 115, 255);" cx="241.229" cy="417.057" rx="31.576" ry="31.576"/>
+  <path d="M 159.98 128.025 H 334.676 L 334.676 128.025 L 335.623 131.869 L 334.676 135.712 L 334.676 135.712 H 159.98 V 128.025 Z" bx:shape="arrow 159.98 128.025 175.643 7.687 7.687 0.947 0 1@f1e58997" style="fill: rgb(75, 115, 255); transform-box: fill-box; transform-origin: 50% 50%;" transform="matrix(1, 0.000018, -0.000018, 1, -78.056397, -47.252978)"/>
+  <path d="M 159.98 128.025 H 334.676 L 334.676 128.025 L 335.623 131.869 L 334.676 135.712 L 334.676 135.712 H 159.98 V 128.025 Z" bx:shape="arrow 159.98 128.025 175.643 7.687 7.687 0.947 0 1@f1e58997" style="fill: rgb(75, 115, 255); stroke-width: 1; transform-origin: 247.801px 131.868px;" transform="matrix(1, 0.000018, -0.000018, 1, 71.244742, -47.888301)"/>
+  <path d="M 299.462 106.839 H 626.47 L 626.47 106.839 L 628.242 110.047 L 626.47 113.254 L 626.47 113.254 H 299.462 V 106.839 Z" bx:shape="arrow 299.462 106.839 328.78 6.415 6.415 1.773 0 1@20fc7abe" style="fill: rgb(75, 115, 255); stroke-width: 1; transform-origin: 463.85px 110.046px;" transform="matrix(-0.000018, 1, -1, -0.000018, -222.312808, 145.088427)"/>
+  <ellipse style="fill: rgb(253, 165, 86);" cx="415.309" cy="96.217" rx="31.576" ry="31.576"/>
+  <ellipse style="fill: rgb(253, 165, 86); stroke-width: 8px;" cx="408.956" cy="417.691" rx="31.576" ry="31.576"/>
+  <ellipse style="fill: rgb(253, 165, 86);" cx="132.59" cy="248.059" rx="31.576" ry="31.576"/>
+  <path style="fill: none; stroke: rgb(253, 165, 86); stroke-width: 8px;" d="M 416.137 94.663 C 406.963 71.729 187.44 109.473 132.147 247.776 C 94.925 340.879 385.552 436.256 415.502 417.408"/>
+</svg>
