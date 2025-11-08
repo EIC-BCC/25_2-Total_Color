@@ -17,60 +17,59 @@ export default function FabBar() {
     }, [graph.renderings]);
 
     return (
-        <motion.menu
-            className="bottom-0 fixed flex items-center justify-between p-8 w-screen z-10"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 3 }}
-        >
+        <>
             {
-                graph.matrix ?
-                    <motion.section
-                        className="flex flex-col gap-5"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 1, delay: 1 }}
+                graph.matrix &&
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1 }}
+                    className="border border-gray-200 bg-white bottom-8 cursor-pointer fixed flex gap-2 hover:opacity-60 left-8 p-2 rounded duration-300 w-fit z-10"
+                >
+                    <div className="flex">
+                        {graph6File ? <DownloadIcon /> : <LoaderCircleIcon className="animate-spin" />}
+                    </div>
+                    <a
+                        download={`${graph.fileName}.g6`}
+                        href={graph6File ? URL.createObjectURL(graph6File) : ''}
                     >
-                        {
-                            graph.class &&
-                            <div
-                                className="border border-gray-200 bg-white cursor-pointer flex gap-2 hover:opacity-60 p-2 rounded duration-300 w-auto"
-                                onClick={() => updateGraph({ showColoring: true })}
-                            >
-                                <div className="flex">
-                                    <PaletteIcon />
-                                </div>
-
-                                Apresentar Coloração
-                            </div>
-                        }
-
-                        <div className="border border-gray-200 bg-white cursor-pointer flex gap-2 hover:opacity-60 p-2 rounded duration-300 w-auto">
-                            <div className="flex">
-                                {graph6File ? <DownloadIcon /> : <LoaderCircleIcon className="animate-spin" />}
-                            </div>
-                            <a
-                                download={`${graph.fileName}.g6`}
-                                href={graph6File ? URL.createObjectURL(graph6File) : ''}
-                            >
-                                Baixar em graph6
-                            </a>
-                        </div>
-                    </motion.section>
-                    :
-                    <div></div>
+                        Baixar em graph6
+                    </a>
+                </motion.div>
             }
+            
+            {
+                graph.matrix && graph.class &&
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1 }}
+                    className="border border-gray-200 bg-white bottom-24 cursor-pointer fixed flex gap-2 hover:opacity-60 left-8 p-2 rounded duration-300 w-fit z-10"
+                    onClick={() => updateGraph({ showColoring: true })}
+                >
+                    <div className="flex">
+                        <PaletteIcon />
+                    </div>
 
+                    Apresentar Coloração
+                </motion.div>
+            }
+        
             <GraphGenerator>
-                <div className="border border-gray-200 bg-white cursor-pointer flex gap-2 hover:opacity-60 p-2 rounded duration-300 w-auto">
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1, delay: 3 }}
+                    className="border border-gray-200 bg-white bottom-8 cursor-pointer fixed flex gap-2 hover:opacity-60 p-2 right-8 rounded duration-300 z-10"
+                >
                     <div className="flex">
                         <PyramidIcon />
                         <PlusIcon size={15} />
                     </div>
 
                     Criar grafo
-                </div>
+                </motion.div>
             </GraphGenerator>
-        </motion.menu>
+        </>
     );
 }
