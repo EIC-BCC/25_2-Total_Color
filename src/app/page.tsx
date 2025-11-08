@@ -6,7 +6,7 @@ import { GraphProvider } from "@/contexts/GraphContext";
 
 export default function Home() {
     return (
-        <main className="flex flex-col h-screen w-screen">
+        <main className="flex flex-col h-screen overflow-hidden w-screen">
             <GraphProvider>
                 <AppBar />
                 <GraphViewer />
