@@ -146,5 +146,4 @@ export default function GraphViewer() {
             }
         </motion.section>
     );
-
 }

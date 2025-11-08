@@ -213,16 +213,17 @@ const showColoring = (
             elementsLabels.forEach((elementLabel) => {
                 setTimeout(() => {
                     const element = cy.$id(convertToElementId(elementLabel));
-                    const colorNumber = String(color + 1);
+                    const previousColor = element.data('colorNumber');
+                    const currentColor = String(color + 1);
     
-                    element.data('colorNumber', colorNumber);
+                    element.data('colorNumber', currentColor);
                     element.style('label', element.data('colorNumber'));
                     element.style('color', colors[color % colors.length]);
                     element.style('border-color', colors[color % colors.length]);
                     element.style('line-color', colors[color % colors.length]);
                     element.style('text-border-color', colors[color % colors.length]);
     
-                    updateColor(element.data('id'), '', colorNumber);
+                    updateColor(element.data('id'), previousColor, currentColor);
                 }, 1500 * counter);
     
                 counter++;
@@ -241,16 +242,17 @@ const showColoring = (
                 if (elementIndex < totalColoring[colorIndex].length) {
                     setTimeout(() => {
                         const element = cy.$id(convertToElementId(totalColoring[colorIndex][elementIndex]));
-                        const colorNumber = String(colorIndex + 1);
+                        const previousColor = element.data('colorNumber');
+                        const currentColor = String(colorIndex + 1);
         
-                        element.data('colorNumber', colorNumber);
+                        element.data('colorNumber', currentColor);
                         element.style('label', element.data('colorNumber'));
                         element.style('color', colors[colorIndex % colors.length]);
                         element.style('border-color', colors[colorIndex % colors.length]);
                         element.style('line-color', colors[colorIndex % colors.length]);
                         element.style('text-border-color', colors[colorIndex % colors.length]);
         
-                        updateColor(element.data('id'), '', colorNumber);
+                        updateColor(element.data('id'), previousColor, currentColor);
                     }, 1500 * counter);
         
                     counter++;
