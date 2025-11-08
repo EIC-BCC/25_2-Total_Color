@@ -128,11 +128,11 @@ export default function GraphViewer() {
                             <div className="flex flex-col gap-2">
                                 <span>Cores utilizadas: {colors.length}</span>
                                 <div className="flex gap-2">
-                                    {colors.map((color, index) => (
+                                    {colors.map((color) => (
                                         <span
                                             key={color}
                                             style={{
-                                                color: colorsHex[index % colorsHex.length]
+                                                color: colorsHex[(Number(color) - 1) % colorsHex.length]
                                             }}
                                         >
                                             {color}
