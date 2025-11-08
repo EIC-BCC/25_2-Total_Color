@@ -92,9 +92,9 @@ export default function ClassGraphGenerator({
                             <SelectValue placeholder="Selecione uma classe" />
                         </SelectTrigger>
                         <SelectContent>
-                            <SelectItem value="completes">Completos</SelectItem>
                             <SelectItem value="paths">Caminhos</SelectItem>
                             <SelectItem value="cycles">Ciclos</SelectItem>
+                            <SelectItem value="completes">Completos</SelectItem>
                         </SelectContent>
                     </Select>
                 </div>
