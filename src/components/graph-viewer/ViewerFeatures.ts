@@ -43,8 +43,20 @@ const generateElements = (matrix: number[][]): ElementsDefinition => {
     return elements;
 };
 
+const hexColorsCssClasses = HexadecimalColors.getAll().map((hexColor) => ({
+    selector: `.${hexColor.replace('#', '')}`,
+    style: {
+        'color': hexColor,
+        'border-color': hexColor,
+        'line-color': hexColor,
+        'text-border-color': hexColor
+    }
+}));
+
 const generateVisualization = (graph: Graph, graphView: GraphView, containerRef: RefObject<HTMLDivElement | null>): Core => {
-    const baseColor = '#526D82';
+    const baseHexColor = '#526D82';
+    const conflictHexColor = '#F00';
+    const selectedHexColor = '#48B3AF';
 
     return cytoscape({
         container: containerRef.current,
@@ -53,7 +65,7 @@ const generateVisualization = (graph: Graph, graphView: GraphView, containerRef:
             {
                 selector: '*',
                 style: {
-                    'color': baseColor,
+                    'color': baseHexColor,
                     'font-size': '16px',
                     'transition-duration': 1
                 }
@@ -62,7 +74,7 @@ const generateVisualization = (graph: Graph, graphView: GraphView, containerRef:
                 selector: 'node',
                 style: {
                     'background-color': '#FFF',
-                    'border-color': baseColor,
+                    'border-color': baseHexColor,
                     'border-width': 2,
                     'font-weight': 'lighter',
                     'height': '40px',
@@ -74,37 +86,39 @@ const generateVisualization = (graph: Graph, graphView: GraphView, containerRef:
             {
                 selector: 'edge',
                 style: {
-                    'line-color': baseColor,
+                    'line-color': baseHexColor,
                     'text-background-color': '#FFF',
                     'text-background-padding': '5px',
                     'text-background-opacity': 1,
-                    'text-border-color': baseColor,
+                    'text-border-color': baseHexColor,
                     'text-border-opacity': 1,
                     'text-border-width': 2,
                     'width': 5
                 }
             },
+            ...hexColorsCssClasses,
             {
                 selector: '[?hasConflict]',
                 style: {
-                    'background-color': '#DC143C',
-                    'line-color': '#DC143C',
+                    'background-color': conflictHexColor,
+                    'border-color': conflictHexColor,
+                    'color': '#FFF',
+                    'font-weight': 'bold',
+                    'line-color': conflictHexColor,
+                    'text-background-color': conflictHexColor,
+                    'text-border-color': conflictHexColor,
                 }
             },
             {
                 selector: ':selected',
                 style: {
-                    'background-color': '#48B3AF',
-                    'color': '#EEE',
-                    'line-color': '#48B3AF',
-                }
-            },
-            {
-                selector: '.highlated',
-                style: {
-                    'background-color': '#FAA533',
-                    'color': '#F3F2EC',
-                    'line-color': '#FAA533'
+                    'background-color': selectedHexColor,
+                    'border-color': selectedHexColor,
+                    'color': '#FFF',
+                    'font-weight': 'bold',
+                    'line-color': selectedHexColor,
+                    'text-background-color': selectedHexColor,
+                    'text-border-color': selectedHexColor
                 }
             }
         ],
@@ -199,10 +213,10 @@ const assignColorNumber = (event: EventObject, updateColor: (elementId: string, 
         const elementId = element.data('id');
         const color = Number(currentColor) - 1;
 
-        element.style('color', HexadecimalColors.get(color));
-        element.style('border-color', HexadecimalColors.get(color));
-        element.style('line-color', HexadecimalColors.get(color));
-        element.style('text-border-color', HexadecimalColors.get(color));
+        if (color >= 0) {
+            element.classes('');
+            element.addClass(HexadecimalColors.getWithoutHash(color));
+        }
 
         updateColor(elementId, previousColor, currentColor);
 
@@ -233,10 +247,8 @@ const showColoring = (
 
             element.data('colorNumber', currentColor);
             element.style('label', element.data('colorNumber'));
-            element.style('color', HexadecimalColors.get(color));
-            element.style('border-color', HexadecimalColors.get(color));
-            element.style('line-color', HexadecimalColors.get(color));
-            element.style('text-border-color', HexadecimalColors.get(color));
+            element.classes('');
+            element.addClass(HexadecimalColors.getWithoutHash(color));
 
             updateColor(element.data('id'), previousColor, currentColor);
         }, 1500 * counter);

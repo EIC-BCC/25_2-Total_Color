@@ -2,7 +2,6 @@ import { mod } from "@/lib/utils";
 
 class HexadecimalColors {
     private static hexColors = [
-        '#eb3b5a',
         '#3867d6',
         '#fa8231',
         '#20bf6b',
@@ -15,6 +14,18 @@ class HexadecimalColors {
 
     public static get(color: number) {
         return this.hexColors[mod(color, this.hexColors.length)];
+    }
+
+    public static getWithoutHash(color: number) {
+        return this.hexColors[mod(color, this.hexColors.length)].replace('#', '');
+    }
+
+    public static getAll() {
+        return this.hexColors;
+    }
+
+    public static getAllWithoutHash() {
+        return this.hexColors.map((hexColor) => hexColor.replace('#', ''));
     }
 }
 
