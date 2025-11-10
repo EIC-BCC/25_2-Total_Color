@@ -1,4 +1,4 @@
-import { useGraph } from "@/contexts/GraphViewContext";
+import { useGraph } from "@/contexts/GraphContext";
 import Graph6 from "@/lib/graphs/Graph6";
 import { DownloadIcon, LoaderCircleIcon } from "lucide-react";
 import { motion } from "motion/react";

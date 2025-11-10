@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 import { Label } from "../ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { Input } from "../ui/input";
-import { useGraph } from "@/contexts/GraphViewContext";
+import { useGraph } from "@/contexts/GraphContext";
 import { layouts } from ".";
 import GraphFactory from "@/lib/graphs/GraphFactory";
 import { GraphClassesNames } from "@/types";

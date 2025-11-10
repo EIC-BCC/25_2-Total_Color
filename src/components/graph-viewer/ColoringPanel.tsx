@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { Card, CardContent } from "../ui/card";
-import { useGraph } from "@/contexts/GraphViewContext";
+import { useGraph } from "@/contexts/GraphContext";
 import { HexadecimalColors } from "./ViewerUtils";
 
 interface ColoringPanelProps {

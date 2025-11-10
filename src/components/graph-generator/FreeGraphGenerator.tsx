@@ -2,7 +2,7 @@ import { FormEventHandler, useState } from "react";
 import { Dropzone, DropzoneContent, DropzoneEmptyState } from "../ui/shadcn-io/dropzone";
 import { Button } from "../ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
-import { useGraph } from "@/contexts/GraphViewContext";
+import { useGraph } from "@/contexts/GraphContext";
 import { AcceptedFileExtensions } from "@/types";
 import { layouts } from ".";
 import GraphFactory from "@/lib/graphs/GraphFactory";

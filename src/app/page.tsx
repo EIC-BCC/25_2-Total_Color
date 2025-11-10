@@ -2,7 +2,7 @@
 import GraphViewer from "@/components/graph-viewer";
 import AppBar from "@/components/appbar";
 import FabBar from "@/components/fabbar";
-import { GraphProvider } from "@/contexts/GraphViewContext";
+import { GraphProvider } from "@/contexts/GraphContext";
 
 export default function Home() {
     return (

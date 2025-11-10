@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { assignElementColor, generateVisualization, showColoring } from "./ViewerFeatures";
-import { useGraph } from "@/contexts/GraphViewContext";
+import { useGraph } from "@/contexts/GraphContext";
 import { Core } from "cytoscape";
 import Welcome from "./Welcome";
 import ColoringPanel from "./ColoringPanel";
