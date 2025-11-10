@@ -71,6 +71,7 @@ const generateVisualization = (graph: Graph, graphView: GraphView, containerRef:
                 style: {
                     'color': baseHexColor,
                     'font-size': '16px',
+                    'font-weight': 'bold',
                     'transition-duration': 1
                 }
             },
@@ -80,7 +81,6 @@ const generateVisualization = (graph: Graph, graphView: GraphView, containerRef:
                     'background-color': '#FFF',
                     'border-color': baseHexColor,
                     'border-width': 2,
-                    'font-weight': 'lighter',
                     'height': '40px',
                     'label': 'data(id)',
                     'text-valign': 'center',
