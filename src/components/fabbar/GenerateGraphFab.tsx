@@ -16,7 +16,7 @@ export default function GenerateGraphFab() {
                     <PlusIcon size={15} />
                 </div>
 
-                Criar grafo
+                Novo grafo
             </motion.div>
         </GraphGenerator>
     );
