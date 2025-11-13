@@ -6,6 +6,7 @@ import { useGraph } from "@/contexts/GraphContext";
 import { AcceptedFileExtensions } from "@/types";
 import { layouts } from ".";
 import GraphFactory from "@/lib/graphs/GraphFactory";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../ui/collapsible";
 
 
 interface GraphFreeOptions {
@@ -83,6 +84,42 @@ export default function FreeGraphGenerator({
                 <h2 className="border-b-2 border-b-gray-500 font-bold">
                     Carregue um arquivo .txt da matriz ou .g6
                 </h2>
+
+                <div className="w-full flex">
+                    <Collapsible className="w-full">
+                        <CollapsibleTrigger className="flex w-full items-center justify-between rounded-md bg-muted px-4 py-2 font-medium [&[data-state=open]>svg]:rotate-180">
+                            Instruções para arquivo .txt
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                className="h-4 w-4 transition-transform duration-200"
+                            >
+                                <path d="m6 9 6 6 6-6" />
+                            </svg>
+                        </CollapsibleTrigger>
+                        <CollapsibleContent className="space-y-2">
+                            <div className="rounded-md border flex flex-col gap-4 px-4 py-3 text-sm text-justify">
+                                <p>O conteúdo do arquivo <em>.txt</em> deve ser a matriz de adjacências do grafo não-direcional. Para efeito de computação, somente o triângulo superior da matriz com exceção da diagonal principal será considerada.</p>
+
+                                <p>Exemplo de conteúdo:</p>
+
+                                <code className="flex flex-col pl-4">
+                                    <span>0111</span>
+                                    <span>0011</span>
+                                    <span>0001</span>
+                                    <span>0000</span>
+                                </code>
+                            </div>
+                        </CollapsibleContent>
+                    </Collapsible>
+                </div>
 
                 <div className="flex flex-col gap-4 items-center">
                     <Dropzone
