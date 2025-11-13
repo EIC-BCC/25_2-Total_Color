@@ -88,6 +88,7 @@ export default function ClassGraphGenerator({
                         name="order"
                         min={graphClassName === 'cycles' ? 3 : 1}
                         value={order}
+                        required
                         onChange={(e) => {
                             setOrder(e.target.value)
                         }}
