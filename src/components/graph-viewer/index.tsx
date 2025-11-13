@@ -51,7 +51,7 @@ export default function GraphViewer() {
     }, [graphView.renderings]);
 
     useEffect(() => {
-        if (cytoscape && graph.totalColoring) {
+        if (cytoscape && graph.totalColoring && graphView.coloring?.show) {
             showColoring(cytoscape, graph, graphView, updateColor);
         }
     }, [graphView.coloring?.show]);
