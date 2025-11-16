@@ -1,41 +1,37 @@
 import { motion } from "motion/react";
-import { WritingText } from "../ui/shadcn-io/writing-text";
 import GraphGenerator from "../graph-generator";
-import { Button } from "../ui/button";
 
 export default function Welcome() {
     return (
-        <motion.div className="flex flex-col gap-24">
-            <motion.div>
-                <WritingText
-                    text="Bem-vindo(a) ao Total-Color 😎"
-                    className="text-2xl lg:text-4xl select-none"
-                    inView={true}
-                    spacing=".5rem"
-                    transition={{
-                        type: "spring",
-                        bounce: 0.6,
-                        duration: 2,
-                        delay: .3
-                    }}
-                />
-            </motion.div>
+        <motion.div
+            className="flex flex-col md:flex-row gap-20"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+        >
+            <GraphGenerator mode="classes">
+                <div className="border bg-white cursor-pointer duration-200 hover:border-blue-500 hover:scale-105 flex flex-col gap-2 p-4 rounded-lg ease-in-out max-w-sm shadow-lg">
+                    <h2 className="font-bold text-2xl">
+                        Classes
+                    </h2>
 
-            <motion.div
-                className="flex flex-col gap-5"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 2, delay: 2 }}
-            >
-                <GraphGenerator tabDefaultValue="classes">
-                    <Button>Iniciar com uma classe</Button>
-                </GraphGenerator>
+                    <p className="text-md">
+                        Visualize classes de grafos, realize a coloração total e verifique a solução.
+                    </p>
+                </div>
+            </GraphGenerator>
 
-                <GraphGenerator tabDefaultValue="free">
-                    <Button>Iniciar no modo livre</Button>
-                </GraphGenerator>
-            </motion.div>
+            <GraphGenerator mode="free">
+                <div className="border bg-white cursor-pointer duration-200 hover:border-blue-500 hover:scale-105 flex flex-col gap-2 p-4 rounded-lg ease-in-out max-w-sm shadow-lg">
+                    <h2 className="font-bold text-2xl">
+                        Livre
+                    </h2>
 
+                    <p className="text-md">
+                        Adicione um .txt com uma matriz de adjacência ou um arquivo .g6, e realize a coloração total.
+                    </p>
+                </div>
+            </GraphGenerator>
         </motion.div>
     );
 }

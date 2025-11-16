@@ -3,8 +3,9 @@ import Graph6 from "@/lib/graphs/Graph6";
 import { DownloadIcon, LoaderCircleIcon } from "lucide-react";
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
+import { RippleButton } from "../ui/shadcn-io/ripple-button";
 
-export default function DownloadGraph6Fab() {
+export default function DownloadGraph6() {
     const { graph, graphView } = useGraph();
     const [graph6File, setGraph6File] = useState<Blob>();
 
@@ -22,16 +23,15 @@ export default function DownloadGraph6Fab() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
-            className="border border-gray-200 bg-white bottom-8 cursor-pointer fixed flex gap-2 hover:opacity-60 left-8 p-2 rounded duration-300 w-fit z-10"
-        >
-            <div className="flex">
-                {graph6File ? <DownloadIcon /> : <LoaderCircleIcon className="animate-spin" />}
-            </div>
+        >           
             <a
                 download={`${graphView.name}.g6`}
                 href={graph6File ? URL.createObjectURL(graph6File) : ''}
             >
-                Baixar em graph6
+                <RippleButton variant={'outline'}>
+                    {graph6File ? <DownloadIcon /> : <LoaderCircleIcon className="animate-spin" />}
+                    <span className="hidden md:inline">Baixar em graph6</span>
+                </RippleButton>
             </a>
         </motion.div>
     );

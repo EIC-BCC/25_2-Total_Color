@@ -4,7 +4,7 @@ import { assignElementColor, generateVisualization, showColoring } from "./Viewe
 import { useGraph } from "@/contexts/GraphContext";
 import { Core } from "cytoscape";
 import Welcome from "./Welcome";
-import ColoringPanel from "./ColoringPanel";
+import ColoringPanel from "./InfoPanel";
 
 export default function GraphViewer() {
     const { graph, graphView } = useGraph();
@@ -58,7 +58,7 @@ export default function GraphViewer() {
 
     return (
         <motion.section
-            className="bg-background flex flex-col grow items-center justify-center relative"
+            className="bg-gradient-to-b from-gray-50 to-gray-100 flex flex-col grow items-center justify-center relative"
         >
             {graphView.renderings < 1 ?
                 <Welcome />

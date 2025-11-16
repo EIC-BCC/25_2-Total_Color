@@ -5,6 +5,7 @@ type GraphContextType = {
     graph: Graph,
     graphView: GraphView;
     initGraph: (newGraph: Graph, newGraphView: GraphView) => void;
+    resetGraph: () => void;
     viewColoring: () => void;
 }
 
@@ -35,6 +36,11 @@ export function GraphProvider({
         }));
     };
 
+    const resetGraph = () => {
+        setGraph(defaultGraph);
+        setGraphView(defaultGraphView);
+    };
+
     const viewColoring = () => {
         setGraphView((prev) => {
             if (prev.coloring) {
@@ -52,7 +58,7 @@ export function GraphProvider({
     };
 
     return (
-        <GraphContext.Provider value={{ graph, graphView, initGraph, viewColoring }}>
+        <GraphContext.Provider value={{ graph, graphView, initGraph, resetGraph, viewColoring }}>
             {children}
         </GraphContext.Provider>
     );

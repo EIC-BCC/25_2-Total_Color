@@ -1,5 +1,4 @@
 import React, { FormEventHandler, useState } from "react";
-import { Button } from "../ui/button";
 import { Label } from "../ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { Input } from "../ui/input";
@@ -7,6 +6,7 @@ import { useGraph } from "@/contexts/GraphContext";
 import { layouts } from ".";
 import GraphFactory from "@/lib/graphs/GraphFactory";
 import { GraphClassesNames } from "@/types";
+import { RippleButton } from "../ui/shadcn-io/ripple-button";
 
 interface ClassGraphGeneratorProps {
     closeDialog: () => void
@@ -117,7 +117,7 @@ export default function ClassGraphGenerator({
                 </div>
             </section>
 
-            <Button disabled={!graphClassName}>Gerar Grafo</Button>
+            {graphClassName && <RippleButton className="bg-blue-500 hover:bg-blue-500">Gerar Grafo</RippleButton>}
         </form>
     );
 }

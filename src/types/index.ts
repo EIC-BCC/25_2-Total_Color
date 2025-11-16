@@ -1,5 +1,6 @@
 import { EdgeDataDefinition, NodeDataDefinition } from "cytoscape";
 
+export type Modes = "classes" | "free";
 export type GraphClassesNames = "completes" | "paths" | "cycles";
 export type AcceptedFileExtensions = "txt" | "g6";
 export type ColoringOrientation = "color" | "index";

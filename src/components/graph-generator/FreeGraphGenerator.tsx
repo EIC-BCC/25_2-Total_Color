@@ -1,12 +1,12 @@
 import { FormEventHandler, useState } from "react";
 import { Dropzone, DropzoneContent, DropzoneEmptyState } from "../ui/shadcn-io/dropzone";
-import { Button } from "../ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { useGraph } from "@/contexts/GraphContext";
 import { AcceptedFileExtensions } from "@/types";
 import { layouts } from ".";
 import GraphFactory from "@/lib/graphs/GraphFactory";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../ui/collapsible";
+import { RippleButton } from "../ui/shadcn-io/ripple-button";
 
 
 interface GraphFreeOptions {
@@ -134,10 +134,6 @@ export default function FreeGraphGenerator({
 
                         <DropzoneContent />
                     </Dropzone>
-
-                    <pre className="max-h-72 max-w-72 overflow-auto">
-                        {graphFile?.content}
-                    </pre>
                 </div>
 
                 <section className={`${graphFile ? 'flex flex-col gap-4' : 'hidden'}`}>
@@ -162,7 +158,7 @@ export default function FreeGraphGenerator({
                 </section>
             </section>
 
-            <Button disabled={!graphFile}>Gerar Grafo</Button>
+            {graphFile && <RippleButton className="bg-blue-500 hover:bg-blue-500">Gerar Grafo</RippleButton>}
         </form>
     );
 }

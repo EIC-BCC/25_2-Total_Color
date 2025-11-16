@@ -1,6 +1,7 @@
 import { useGraph } from "@/contexts/GraphContext";
 import { PaletteIcon } from "lucide-react";
 import { motion } from "motion/react";
+import { RippleButton } from "../ui/shadcn-io/ripple-button";
 
 export default function ShowColoringFab() {
     const { graph, viewColoring } = useGraph();
@@ -14,14 +15,11 @@ export default function ShowColoringFab() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
-            className="border border-gray-200 bg-white bottom-24 cursor-pointer fixed flex gap-2 hover:opacity-60 left-8 p-2 rounded duration-300 w-fit z-10"
-            onClick={() => viewColoring()}
         >
-            <div className="flex">
+            <RippleButton variant={'outline'} onClick={() => viewColoring()}>
                 <PaletteIcon />
-            </div>
-
-            Apresentar Coloração
+                <span className="hidden md:inline">Apresentar Coloração</span>
+            </RippleButton>
         </motion.div>
     );
 }

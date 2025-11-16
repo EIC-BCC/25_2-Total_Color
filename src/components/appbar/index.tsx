@@ -1,40 +1,36 @@
-import { EllipsisVerticalIcon } from "lucide-react";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
+import About from "./About";
+import DownloadGraph6 from "./DownloadGraph6";
+import NewGraph from "./NewGraph";
+import ShowColoring from "./ShowColoring";
 
 export default function AppBar() {
     return (
-        <menu className="bg-gray-100 flex items-center justify-between px-12 py-2 relative rounded-b-lg shadow-lg">
+        <menu className="bg-blue-500 flex gap-10 items-center justify-between px-12 py-4 relative shadow">
 
-            <h2 className="font-bold text-lg select-none">
-                Total-Color
+            <h2 className="flex gap-[0.1rem] select-none text-2xl text-white">
+                <span className="hover:text-red-500">T</span>
+                <span className="hover:text-lime-500">o</span>
+                <span className="hover:text-teal-500">t</span>
+                <span className="hover:text-emerald-500">a</span>
+                <span className="hover:text-indigo-500">l</span>
+                <span className="hover:text-rose-500">-</span>
+                <span className="hover:text-slate-500">C</span>
+                <span className="hover:text-yellow-500">o</span>
+                <span className="hover:text-cyan-500">l</span>
+                <span className="hover:text-green-500">o</span>
+                <span className="hover:text-amber-500">r</span>
             </h2>
-            
-            <span></span>
-            
-            <Dialog>
-                <DialogTrigger asChild>
-                    <div className="border border-gray-200 bg-white cursor-pointer hover:opacity-60 p-2 rounded duration-300">
-                        <EllipsisVerticalIcon className="h-6 w-6" />
-                    </div>
-                </DialogTrigger>
 
-                <DialogContent>
-                    <DialogHeader>
-                        <DialogTitle>Sobre</DialogTitle>
-                        <DialogDescription></DialogDescription>
-                    </DialogHeader>
+            <div className="flex gap-2">
+                <DownloadGraph6 />
 
-                    <section className="flex flex-col gap-2">
-                        <p>Sistema produto do TCC &quot;Total-color: uma aplicação web para coloração total em grafos&quot; por Renan Carvalho.</p>
+                <ShowColoring />
 
-                        <div>
-                            <p>Orientadores:</p>
-                            <p>Profa. Mayara Midori Omai, M.Sc.</p>
-                            <p>Prof. Mauro Nigro Alves Junior, Dr.</p>
-                        </div>
-                    </section>
-                </DialogContent>
-            </Dialog>
+                <NewGraph />
+
+                <About />
+            </div>
+
         </menu>
     );
 }

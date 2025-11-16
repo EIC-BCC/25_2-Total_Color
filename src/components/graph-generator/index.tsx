@@ -1,9 +1,9 @@
 "use client"
 import { ReactNode, useState } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
-import { Tabs, TabsContent, TabsContents, TabsList, TabsTrigger } from "../ui/shadcn-io/tabs";
 import ClassGraphGenerator from "./ClassGraphGenerator";
 import FreeGraphGenerator from "./FreeGraphGenerator";
+import { Modes } from "@/types";
 
 export const layouts = [
     { value: 'random', label: 'Aleatório' },
@@ -12,30 +12,17 @@ export const layouts = [
 ];
 
 interface GraphGeneratorProps {
-    children: ReactNode,
-    tabDefaultValue?: string
+    children?: ReactNode,
+    mode: Modes
 }
 
 export default function GraphGenerator({
     children,
-    tabDefaultValue
+    mode
 }: GraphGeneratorProps) {
     const [open, setOpen] = useState(false);
 
     const closeDialog = () => setOpen(false);
-
-    const tabs = [
-        {
-            value: 'classes',
-            name: 'Classes',
-            content: <ClassGraphGenerator closeDialog={closeDialog} />
-        },
-        {
-            value: 'free',
-            name: 'Livre',
-            content: <FreeGraphGenerator closeDialog={closeDialog} />
-        }
-    ];
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
@@ -49,23 +36,11 @@ export default function GraphGenerator({
                     <DialogDescription></DialogDescription>
                 </DialogHeader>
 
-                <Tabs defaultValue={tabDefaultValue || tabs[0].value}>
-                    <TabsList className="grid w-full grid-cols-2">
-                        {tabs.map((tab) => (
-                            <TabsTrigger key={tab.value} value={tab.value}>
-                                {tab.name}
-                            </TabsTrigger>
-                        ))}
-                    </TabsList>
-
-                    <TabsContents>
-                        {tabs.map((tab) => (
-                            <TabsContent key={tab.value} value={tab.value}>
-                                {tab.content}
-                            </TabsContent>
-                        ))}
-                    </TabsContents>
-                </Tabs>
+                {mode === 'classes' ?
+                    <ClassGraphGenerator closeDialog={closeDialog} />
+                    :
+                    <FreeGraphGenerator closeDialog={closeDialog} />
+                }
             </DialogContent>
         </Dialog>
     );
