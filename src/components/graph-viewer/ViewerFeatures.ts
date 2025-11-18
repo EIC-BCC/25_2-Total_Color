@@ -177,18 +177,7 @@ const assignElementColor = (event: EventObject, updateColor: (elementId: string,
     let isFirstKeyPress = true;
     const previousColor = element.data('elementColor');
 
-    const keydownHandler = (event: KeyboardEvent) => {
-        const key = event.key;
-
-        if (key === 'Backspace') {
-            const elementColor = element.data('elementColor');
-
-            element.data('elementColor', elementColor.substring(0, elementColor.length - 1));
-            element.style('label', element.data('elementColor'));
-        }
-    }
-
-    const keypressHandler = (event: KeyboardEvent) => {
+    const keyupHandler = (event: KeyboardEvent) => {
         const key = event.key;
         const isNumber = /\d/g;
 
@@ -202,13 +191,17 @@ const assignElementColor = (event: EventObject, updateColor: (elementId: string,
             }
 
             element.style('label', element.data('elementColor'));
+        } else if (key === 'Backspace') {
+            const elementColor = element.data('elementColor');
+
+            element.data('elementColor', elementColor.substring(0, elementColor.length - 1));
+            element.style('label', element.data('elementColor'));
         } else {
             element.unselect();
         }
     }
 
-    window.addEventListener('keydown', keydownHandler);
-    window.addEventListener('keypress', keypressHandler);
+    window.addEventListener('keyup', keyupHandler);
 
     element.off('unselect');
 
@@ -224,8 +217,7 @@ const assignElementColor = (event: EventObject, updateColor: (elementId: string,
 
         updateColor(elementId, previousColor, currentColor);
 
-        window.removeEventListener('keydown', keydownHandler);
-        window.removeEventListener('keypress', keypressHandler);
+        window.removeEventListener('keyup', keyupHandler);
 
         showColoringValidation(element);
     });
