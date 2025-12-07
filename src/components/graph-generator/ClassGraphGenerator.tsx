@@ -34,7 +34,6 @@ export default function ClassGraphGenerator({
             initGraph(graph, {
                 layout,
                 name: `${graphClassName}-${order}`,
-                renderings: 0,
                 coloring: {
                     orientation: graphClassName === 'completes' ? 'color' : 'index',
                     show: false

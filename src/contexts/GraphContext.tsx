@@ -4,6 +4,7 @@ import { createContext, ReactNode, useContext, useState } from "react";
 type GraphContextType = {
     graph: Graph,
     graphView: GraphView;
+    graphRenderings: number;
     initGraph: (newGraph: Graph, newGraphView: GraphView) => void;
     resetGraph: () => void;
     viewColoring: () => void;
@@ -17,23 +18,20 @@ const defaultGraph = {
 
 const defaultGraphView = {
     layout: '',
-    name: '',
-    renderings: 0
+    name: ''
 };
 
 export function GraphProvider({
     children
 }: { children: ReactNode }) {
+    const [graphRenderings, setGraphRenderigs] = useState(0);
     const [graph, setGraph] = useState<Graph>(defaultGraph);
     const [graphView, setGraphView] = useState<GraphView>(defaultGraphView);
 
     const initGraph = (newGraph: Graph, newGraphView: GraphView) => {
         setGraph(newGraph);
-        
-        setGraphView((prev) => ({
-            ...newGraphView,
-            renderings: !prev ? 1 : prev.renderings + 1
-        }));
+        setGraphView(newGraphView);
+        setGraphRenderigs(prev => prev + 1);
     };
 
     const resetGraph = () => {
@@ -58,7 +56,7 @@ export function GraphProvider({
     };
 
     return (
-        <GraphContext.Provider value={{ graph, graphView, initGraph, resetGraph, viewColoring }}>
+        <GraphContext.Provider value={{ graph, graphView, graphRenderings, initGraph, resetGraph, viewColoring }}>
             {children}
         </GraphContext.Provider>
     );

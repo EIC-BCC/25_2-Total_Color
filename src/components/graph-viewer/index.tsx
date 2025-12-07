@@ -7,7 +7,7 @@ import Welcome from "./Welcome";
 import ColoringPanel from "./InfoPanel";
 
 export default function GraphViewer() {
-    const { graph, graphView } = useGraph();
+    const { graph, graphView, graphRenderings } = useGraph();
     const cyContainerRef = useRef<HTMLDivElement | null>(null);
     const [coloring, setColoring] = useState<Map<string, string[]>>(new Map());
     const [cytoscape, setCytoscape] = useState<Core>();
@@ -41,18 +41,22 @@ export default function GraphViewer() {
     }
 
     useEffect(() => {
-        if (graphView.renderings > 0) {
+        if (graphRenderings > 0) {
             const cytoscapeInstance = generateVisualization(graph, graphView, cyContainerRef);
 
             cytoscapeInstance.elements().on('select', (e) => assignElementColor(e, updateColor));
             setColoring(new Map());
             setCytoscape(cytoscapeInstance);
         }
-    }, [graphView.renderings]);
+    }, [graphRenderings]);
 
     useEffect(() => {
         if (cytoscape && graph.totalColoring && graphView.coloring?.show) {
-            showColoring(cytoscape, graph, graphView, updateColor);
+            const intervalId = showColoring(cytoscape, graph, graphView, updateColor);
+
+            if (intervalId) {
+                return () => clearInterval(intervalId);
+            }
         }
     }, [graphView.coloring?.show]);
 
@@ -60,11 +64,11 @@ export default function GraphViewer() {
         <motion.section
             className="bg-gradient-to-b from-gray-50 to-gray-100 flex flex-col grow items-center justify-center relative"
         >
-            {graphView.renderings < 1 ?
+            {graph.matrix.length === 0 ?
                 <Welcome />
                 :
                 <>
-                    <div ref={cyContainerRef} className={`h-full w-full ${graphView.renderings < 1 && 'hidden'}`}></div>
+                    <div ref={cyContainerRef} className={`h-full w-full ${graphRenderings < 1 && 'hidden'}`}></div>
 
                     <ColoringPanel elementColors={Array.from(coloring.keys())} />
                 </>

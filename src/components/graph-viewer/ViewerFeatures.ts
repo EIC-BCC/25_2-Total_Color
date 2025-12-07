@@ -241,29 +241,12 @@ const showColoring = (
         return;
     }
 
-    let counter = 0;
-
-    const showColor = (color: number, elementLabel: string) => {
-        setTimeout(() => {
-            const element = cy.$id(convertToElementId(elementLabel));
-            const previousColor = element.data('elementColor');
-            const currentColor = String(color + 1);
-
-            element.data('elementColor', currentColor);
-            element.style('label', element.data('elementColor'));
-            element.classes('');
-            element.addClass(HexadecimalColors.getWithoutHash(color));
-
-            updateColor(element.data('id'), previousColor, currentColor);
-        }, 1500 * counter);
-
-        counter++;
-    };
+    const coloring: { color: number, elementLabel: string }[] = [];
 
     if (graphView.coloring.orientation === 'color') {
         graph.totalColoring.forEach((elementsLabels, color) => {
             elementsLabels.forEach((elementLabel) => {
-                showColor(color, elementLabel);
+                coloring.push({ color, elementLabel });
             });
         });
     } else if (graphView.coloring.orientation === 'index') {
@@ -277,11 +260,37 @@ const showColoring = (
         for (let elementIndex = 0; elementIndex <= maxElementIndex; elementIndex++) {
             for (let colorIndex = 0; colorIndex <= maxColorIndex; colorIndex++) {
                 if (elementIndex < graph.totalColoring[colorIndex].length) {
-                    showColor(colorIndex, graph.totalColoring[colorIndex][elementIndex]);
+                    coloring.push({ color: colorIndex, elementLabel: graph.totalColoring[colorIndex][elementIndex] });
                 }
             }
         }
     }
+
+    let index = 0;
+
+    const intervalId = setInterval(() => {
+        if (index >= coloring.length) {
+            clearInterval(intervalId);
+            return;
+        }
+
+        const { color, elementLabel } = coloring[index];
+
+        const element = cy.$id(convertToElementId(elementLabel));
+        const previousColor = element.data('elementColor');
+        const currentColor = String(color + 1);
+
+        element.data('elementColor', currentColor);
+        element.style('label', element.data('elementColor'));
+        element.classes('');
+        element.addClass(HexadecimalColors.getWithoutHash(color));
+
+        updateColor(element.data('id'), previousColor, currentColor);
+
+        index++;
+    }, 1500);
+
+    return intervalId;
 };
 
 export { generateVisualization, assignElementColor, showColoring }

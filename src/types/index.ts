@@ -12,7 +12,6 @@ export interface GraphView {
     };
     layout: string;
     name: string;
-    renderings: number;
 }
 
 export interface TCNodeDataDefinition extends NodeDataDefinition {
