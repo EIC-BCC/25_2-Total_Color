@@ -67,8 +67,7 @@ export default function FreeGraphGenerator({
 
             initGraph(graph, {
                 layout,
-                name: graphFile.name,
-                renderings: 0
+                name: graphFile.name
             });
         }
 
@@ -106,7 +105,7 @@ export default function FreeGraphGenerator({
                         </CollapsibleTrigger>
                         <CollapsibleContent className="space-y-2">
                             <div className="rounded-md border flex flex-col gap-4 px-4 py-3 text-sm text-justify">
-                                <p>O conteúdo do arquivo <em>.txt</em> deve ser a matriz de adjacências do grafo não-direcional. Para efeito de computação, somente o triângulo superior da matriz com exceção da diagonal principal será considerada.</p>
+                                <p>O conteúdo do arquivo <em>.txt</em> deve ser a matriz de adjacências do grafo não-direcionado. Somente o triângulo superior da matriz com exceção da diagonal principal será considerado.</p>
 
                                 <p>Exemplo de conteúdo:</p>
 
