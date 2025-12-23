@@ -35,7 +35,7 @@ export default class GraphFree implements Graph {
         const length = Number.parseInt(lines[order + 1]);
 
         const matrix: number[][] = Array.from({ length: order }, () => new Array(order).fill(0));
-        const totalColoring: string[][] = Array.from({ length: order }, () => new Array());
+        const totalColoring: string[][] = Array.from({ length: order }, () => []);
 
 
         lines.forEach((line, index) => {
