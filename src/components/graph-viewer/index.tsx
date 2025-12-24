@@ -5,7 +5,6 @@ import { useGraph } from "@/contexts/GraphContext";
 import { Core } from "cytoscape";
 import Welcome from "./Welcome";
 import ColoringPanel from "./InfoPanel";
-import { TCNodeDataDefinition } from "@/types";
 
 export default function GraphViewer() {
     const { graph, graphView, graphRenderings } = useGraph();
@@ -46,7 +45,7 @@ export default function GraphViewer() {
             const cy = generateVisualization(graph, graphView, cyContainerRef);
 
             cy.on('select', '*', (e) => assignElementColor(e, updateColor));
-            cy.on('select', 'node', (e) => createEdge(e, graph));
+            // cy.on('select', 'node', (e) => createEdge(e, graph));
             cy.on('tap', (e) => createVertex(e, graph));
 
             setColoring(new Map());

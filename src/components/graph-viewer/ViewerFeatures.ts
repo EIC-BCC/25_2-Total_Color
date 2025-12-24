@@ -76,7 +76,7 @@ const createEdge = (event: EventObject, graph: Graph) => {
         if ((key === 'e' || key === 'E') && nodesSelected.length === 2 && graph instanceof GraphFree) {
             const sourceId = nodesSelected[0].id();
             const targetId = nodesSelected[1].id();
-            const edgeId = `${sourceId}${targetId}`
+            const edgeId = `${sourceId}${targetId}`;
 
             const edgedata: TCEdgeDataDefinition = {
                 id: edgeId,
@@ -279,7 +279,7 @@ const assignElementColor = (event: EventObject, updateColor: (elementId: string,
         element.classes('');
 
         if (currentColor) {
-            element.addClass(HexadecimalColors.getWithoutHash(Number(currentColor)));
+            element.addClass(HexadecimalColors.getWithoutHash(Number(currentColor) - 1));
         }
 
         updateColor(elementId, previousColor, currentColor);
