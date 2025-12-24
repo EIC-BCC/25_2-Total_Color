@@ -22,7 +22,7 @@ export default function DownloadGraph6() {
         setIsDownloading(false);
     };
 
-    if (graph.matrix.length === 0) {
+    if (!graphView.active) {
         return null;
     }
 

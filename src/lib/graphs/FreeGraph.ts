@@ -1,15 +1,27 @@
 import { AcceptedFileExtensions } from "@/types";
 import Graph6 from "graph6";
 
-export default class GraphFree implements Graph {
+interface ConfigConstructor {
+    fileExtension: AcceptedFileExtensions,
+    content: string,
+    isColored: boolean
+}
+
+export default class FreeGraph implements Graph {
     matrix: number[][];
     totalColoring?: string[][];
 
-    constructor(fileExtension: AcceptedFileExtensions, content: string, isColored: boolean) {
-        if (isColored) {
-            [this.matrix, this.totalColoring] = this.getColoredMatrix(content);
+    constructor(config: ConfigConstructor | null) {
+        if (config) {
+            const { fileExtension, content, isColored } = config;
+
+            if (isColored) {
+                [this.matrix, this.totalColoring] = this.getColoredMatrix(content);
+            } else {
+                this.matrix = this.getMatrix(fileExtension, content);
+            }
         } else {
-            this.matrix = this.getMatrix(fileExtension, content);
+            this.matrix = [];
         }
     }
 

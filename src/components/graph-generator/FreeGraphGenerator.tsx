@@ -7,6 +7,7 @@ import { layouts } from ".";
 import GraphFactory from "@/lib/graphs/GraphFactory";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../ui/collapsible";
 import { RippleButton } from "../ui/shadcn-io/ripple-button";
+import { DownloadIcon } from "lucide-react";
 
 
 interface GraphFreeOptions {
@@ -58,25 +59,24 @@ export default function FreeGraphGenerator({
     const handleSubmit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        if (graphFile) {
-            const graph = GraphFactory.make({
-                graphFree: {
-                    fileExtension: graphFile.fileExtension,
-                    content: graphFile.content,
-                    isColored: isColored
-                }
-            });
+        const graph = GraphFactory.make({
+            graphFree: graphFile ? {
+                fileExtension: graphFile.fileExtension,
+                content: graphFile.content,
+                isColored: isColored
+            } : null
+        });
 
-            initGraph(graph, {
-                layout,
-                name: graphFile.name,
-                coloring: {
-                    orientation: 'color',
-                    show: false
-                }                
-            });
-        }
-
+        initGraph(graph, {
+            layout,
+            name: graphFile ? graphFile.name : 'free-graph',
+            coloring: {
+                orientation: 'color',
+                show: false
+            },
+            active: true
+        });
+        
         closeDialog();
     };
 
@@ -84,12 +84,55 @@ export default function FreeGraphGenerator({
         <form
             className="flex flex-col gap-4"
             onSubmit={handleSubmit}
-        >
-            <section className="flex flex-col gap-4">
-                <h2 className="border-b-2 border-b-gray-500 font-bold">
-                    Carregue um arquivo .txt ou .g6
-                </h2>
+        >   
+            <RippleButton className="bg-blue-500 hover:bg-blue-500">
+                Gerar um grafo do zero
+            </RippleButton>
 
+            <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-gray-300"></div>
+                </div>
+                <div className="relative flex justify-center text-sm">
+                    <span className="px-4 bg-white text-gray-500 font-medium">OU</span>
+                </div>
+            </div>
+
+            <section className="flex flex-col gap-4">
+                <div className="flex flex-col gap-4 items-center">
+                    <Dropzone
+                        accept={{ 'text/plain': ['.txt', '.g6'] }}
+                        maxFiles={1}
+                        maxSize={1024 * 1024 * 10}
+                        onDrop={handleDrop}
+                        onError={console.error}
+                        src={files}
+                    >
+                        <DropzoneEmptyState>
+                            <div className="flex flex-col gap-2 items-center">
+                                <DownloadIcon />
+                                <p>Adicione um grafo a partir de um arquivo .txt ou .g6</p>
+
+                                <div className="text-gray-600 text-sm">
+                                    <p>Arraste e solte ou clique para carregar</p>
+                                    <p>Tamanho máximo: 10MB</p>
+                                </div>
+                            </div>
+                        </DropzoneEmptyState>
+
+                        <DropzoneContent>
+                            <div className="flex flex-col gap-2 items-center">
+                                <DownloadIcon />
+                                <p>{files && files[0].name}</p>
+
+                                <div className="text-gray-600 text-sm">
+                                    <p>Arraste e solte ou clique para substituir</p>
+                                </div>
+                            </div>                            
+                        </DropzoneContent>
+                    </Dropzone>
+                </div>
+                
                 <div className="w-full flex">
                     <Collapsible className="w-full">
                         <CollapsibleTrigger className="flex w-full items-center justify-between rounded-md bg-muted px-4 py-2 font-medium [&[data-state=open]>svg]:rotate-180">
@@ -126,7 +169,7 @@ export default function FreeGraphGenerator({
                     </Collapsible>
                 </div>
 
-                <div className="border-2 hover:opacity-70 rounded">
+                <div className="border-2 hover:opacity-70 rounded-md">
                     <label className="cursor-pointer flex gap-2 p-2">
                         <input
                             type="checkbox"
@@ -135,30 +178,11 @@ export default function FreeGraphGenerator({
                             onChange={(e) => setIsColored(e.target.checked)}
                         />
 
-                        É um grafo colorido?
+                        Grafo com coloração inclusa
                     </label>
                 </div>
 
-                <div className="flex flex-col gap-4 items-center">
-                    <Dropzone
-                        accept={{ 'text/plain': ['.txt', '.g6'] }}
-                        maxFiles={1}
-                        maxSize={1024 * 1024 * 10}
-                        onDrop={handleDrop}
-                        onError={console.error}
-                        src={files}
-                    >
-                        <DropzoneEmptyState />
-
-                        <DropzoneContent />
-                    </Dropzone>
-                </div>
-
                 <section className={`${graphFile ? 'flex flex-col gap-4' : 'hidden'}`}>
-                    <h2 className="border-b-2 border-b-gray-500 font-bold">
-                        Layout
-                    </h2>
-
                     <div className="flex gap-4">
                         <Select value={layout} onValueChange={setLayout}>
                             <SelectTrigger className="w-full">
@@ -176,7 +200,11 @@ export default function FreeGraphGenerator({
                 </section>
             </section>
 
-            {graphFile && <RippleButton className="bg-blue-500 hover:bg-blue-500">Gerar Grafo</RippleButton>}
+            {graphFile &&
+                <RippleButton className="bg-blue-500 hover:bg-blue-500">
+                    Gerar um grafo a partir de um arquivo
+                </RippleButton>
+            }
         </form>
     );
 }

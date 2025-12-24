@@ -68,14 +68,14 @@ export default function GraphViewer() {
         <motion.section
             className="bg-gradient-to-b from-gray-50 to-gray-100 flex flex-col grow items-center justify-center relative"
         >
-            {graph.matrix.length === 0 ?
-                <Welcome />
-                :
+            {graphView.active ?
                 <>
                     <div ref={cyContainerRef} className={`h-full w-full ${graphRenderings < 1 && 'hidden'}`}></div>
 
                     <ColoringPanel elementColors={Array.from(coloring.keys())} />
                 </>
+                :
+                <Welcome />
             }
         </motion.section>
     );

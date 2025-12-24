@@ -2,7 +2,7 @@ import { AcceptedFileExtensions, GraphClassesNames } from "@/types";
 import PathGraph from "./classes/PathGraph";
 import CycleGraph from "./classes/CycleGraph";
 import CompleteGraph from "./classes/CompleteGraph";
-import FreeGraph from "./GraphFree";
+import FreeGraph from "./FreeGraph";
 
 interface MakeArguments {
     graphClass?: {
@@ -13,7 +13,7 @@ interface MakeArguments {
         fileExtension: AcceptedFileExtensions,
         content: string,
         isColored: boolean
-    }
+    } | null
 }
 
 export default class GraphFactory {
@@ -34,10 +34,8 @@ export default class GraphFactory {
                     Graph = new CompleteGraph(order);
                     break;
             }
-        } else if (graphFree) {
-            const { fileExtension, content, isColored } = graphFree;
-
-            Graph = new FreeGraph(fileExtension, content, isColored);
+        } else if (graphFree !== undefined) {
+            Graph = new FreeGraph(graphFree);
         } else {
             throw new Error('Insira informações em graphClass ou graphFree');
         }

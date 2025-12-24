@@ -37,7 +37,8 @@ export default function ClassGraphGenerator({
                 coloring: {
                     orientation: graphClassName === 'completes' ? 'color' : 'index',
                     show: false
-                }
+                },
+                active: true
             });
         }
 

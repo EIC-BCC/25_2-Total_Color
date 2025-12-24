@@ -1,4 +1,3 @@
-import GraphFree from "@/lib/graphs/GraphFree";
 import { GraphView } from "@/types";
 import { createContext, ReactNode, useContext, useState } from "react";
 
@@ -8,11 +7,7 @@ type GraphContextType = {
     graphRenderings: number;
     initGraph: (newGraph: Graph, newGraphView: GraphView) => void;
     resetGraph: () => void;
-    viewColoring: () => void;
-    // addVertex: () => void;
-    // rmVertex: (vertex: number) => void;
-    // addEdge: (origin: number, target: number) => void;
-    // rmEdge: (origin: number, target: number) => void;    
+    viewColoring: () => void;  
 }
 
 const GraphContext = createContext<GraphContextType | null>(null);
@@ -23,7 +18,8 @@ const defaultGraph = {
 
 const defaultGraphView = {
     layout: '',
-    name: ''
+    name: '',
+    active: false
 };
 
 export function GraphProvider({
@@ -38,30 +34,6 @@ export function GraphProvider({
         setGraphView(newGraphView);
         setGraphRenderigs(prev => prev + 1);
     };
-
-    // const addVertex = () => {
-    //     if (graph instanceof GraphFree) {
-    //         graph.addVertex();
-    //     }
-    // }
-
-    // const rmVertex = (vertex: number) => {
-    //     if (graph instanceof GraphFree) {
-    //         graph.rmVertex(vertex);
-    //     }
-    // }
-
-    // const addEdge = (origin: number, target: number) => {
-    //     if (graph instanceof GraphFree) {
-    //         graph.addEdge(origin, target);
-    //     }
-    // }
-
-    // const rmEdge = (origin: number, target: number) => {
-    //     if (graph instanceof GraphFree) {
-    //         graph.rmEdge(origin, target);
-    //     }
-    // }
 
     const resetGraph = () => {
         setGraph(defaultGraph);
@@ -90,10 +62,6 @@ export function GraphProvider({
             graphView,
             graphRenderings,
             initGraph,
-            // addVertex,
-            // rmVertex,
-            // addEdge,
-            // rmEdge,
             resetGraph,
             viewColoring
         }}>

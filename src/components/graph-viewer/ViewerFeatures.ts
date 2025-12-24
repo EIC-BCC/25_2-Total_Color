@@ -2,7 +2,7 @@ import { GraphView, TCEdgeDataDefinition, TCNodeDataDefinition } from "@/types";
 import cytoscape, { Collection, Core, ElementsDefinition, EventObject, SingularElementArgument } from "cytoscape";
 import { RefObject } from "react";
 import { convertToElementId, convertToElementLabel, HexadecimalColors } from "./ViewerUtils";
-import GraphFree from "@/lib/graphs/GraphFree";
+import GraphFree from "@/lib/graphs/FreeGraph";
 
 type ValidatedTotalColoring = {
     hasConflict: boolean,
@@ -55,7 +55,7 @@ const createVertex = (event: EventObject, graph: Graph) => {
             hasConflict: false,
             elementColor: ''
         };
-    
+
         event.cy.add({
             data: nodeData,
             position: event.position
@@ -95,7 +95,7 @@ const createEdge = (event: EventObject, graph: Graph) => {
             }
 
             nodesSelected.unselect();
-        } 
+        }
     }
 
     window.addEventListener('keypress', keypressHandler);
@@ -104,7 +104,7 @@ const createEdge = (event: EventObject, graph: Graph) => {
 
     element.on('unselect', () => {
         window.removeEventListener('keypress', keypressHandler);
-    });    
+    });
 };
 
 const hexColorsCssClasses = HexadecimalColors.getAll().map((hexColor) => ({
