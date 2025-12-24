@@ -1,18 +1,26 @@
 import { useGraph } from "@/contexts/GraphContext";
 import { FileType2Icon, LoaderCircleIcon } from "lucide-react";
 import { motion } from "motion/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { RippleButton } from "../ui/shadcn-io/ripple-button";
 import Graph6 from "graph6";
 
 export default function DownloadGraph6() {
-    const { graph, graphView, graphRenderings } = useGraph();
-    const [graph6File, setGraph6File] = useState<Blob>();
+    const { graph, graphView } = useGraph();
+    const [isDownloading, setIsDownloading] = useState(false);
 
-    useEffect(() => {
+    const download = () => {
+        setIsDownloading(true);
+
         const blob = new Blob([Graph6.parse(graph.matrix)]);
-        setGraph6File(blob);
-    }, [graphRenderings]);
+        const a = document.createElement('a');
+
+        a.download = `${graphView.name}.g6`;
+        a.href = URL.createObjectURL(blob);
+        a.click();
+
+        setIsDownloading(false);
+    };
 
     if (graph.matrix.length === 0) {
         return null;
@@ -24,15 +32,10 @@ export default function DownloadGraph6() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
         >           
-            <a
-                download={`${graphView.name}.g6`}
-                href={graph6File ? URL.createObjectURL(graph6File) : ''}
-            >
-                <RippleButton variant={'outline'}>
-                    {graph6File ? <FileType2Icon /> : <LoaderCircleIcon className="animate-spin" />}
-                    <span className="hidden lg:inline">Baixar em graph6</span>
-                </RippleButton>
-            </a>
+            <RippleButton variant={'outline'} onClick={download}>
+                {isDownloading ? <LoaderCircleIcon className="animate-spin" /> : <FileType2Icon />}
+                <span className="hidden lg:inline">Baixar em graph6</span>
+            </RippleButton>
         </motion.div>
     );
 }
