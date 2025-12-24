@@ -71,7 +71,7 @@ export default function InfoPanel({
                                 </div>
                             }
 
-                            <div className="flex flex-row flex-wrap gap-2 items-center lg:flex-col lg:items-start">
+                            <div className="flex flex-col flex-wrap gap-2 items-start">
                                 <div className="flex gap-2">
                                     <span className="font-semibold">
                                         Cores utilizadas:
@@ -82,7 +82,7 @@ export default function InfoPanel({
                                     </span>
                                 </div>
 
-                                <div className="border border-blue-500 flex flex-wrap gap-2 lg:border-0 lg:p-0 p-2 rounded">
+                                <div className="flex flex-wrap gap-2 lg:p-0 p-2 rounded">
                                     {elementColors.map((elementColor) => {
                                         const color = Number(elementColor) - 1;
 
