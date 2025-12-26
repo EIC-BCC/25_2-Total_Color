@@ -3,6 +3,7 @@ import PathGraph from "./classes/PathGraph";
 import CycleGraph from "./classes/CycleGraph";
 import CompleteGraph from "./classes/CompleteGraph";
 import FreeGraph from "./FreeGraph";
+import { Graph } from "./Graph";
 
 interface MakeArguments {
     graphClass?: {
