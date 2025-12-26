@@ -1,3 +1,4 @@
+import { Graph } from "@/lib/graphs/Graph";
 import { GraphView, Modes } from "@/types";
 import { createContext, ReactNode, useContext, useState } from "react";
 
