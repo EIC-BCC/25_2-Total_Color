@@ -1,3 +1,5 @@
+import { Graph } from "../Graph";
+
 export abstract class GraphClass implements Graph {
     matrix: number[][];
     totalColoring: string[][];

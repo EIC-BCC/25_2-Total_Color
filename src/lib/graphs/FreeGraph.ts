@@ -1,5 +1,6 @@
 import { AcceptedFileExtensions } from "@/types";
 import Graph6 from "graph6";
+import { Graph } from "./Graph";
 
 interface ConfigConstructor {
     fileExtension: AcceptedFileExtensions,

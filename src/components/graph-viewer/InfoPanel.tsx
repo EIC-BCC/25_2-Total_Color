@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 import { Card, CardContent } from "../ui/card";
 import { useGraph } from "@/contexts/GraphContext";
 import { HexadecimalColors } from "./ViewerUtils";
-import { PiHandTapLight, PiKeyReturn, PiMouseScrollLight } from "react-icons/pi";
+import { PiHandTapLight, PiMouseScrollLight } from "react-icons/pi";
 import { HiCursorClick } from "react-icons/hi";
 import { BsCircleFill, BsShiftFill } from "react-icons/bs";
 import { Modes } from "@/types";
@@ -47,7 +47,7 @@ export const InstructionsText = () => (
 
         <div className={bothDevices}>
             <InfoIcon size={30} />
-            Caso precise, você poderá acessar essas informações novamente pelo botão "Instruções" no menu
+            Caso precise, você poderá acessar essas informações novamente pelo botão &quot;Instruções&quot; no menu
         </div>
     </div>
 );

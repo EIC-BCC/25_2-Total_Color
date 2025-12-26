@@ -5,9 +5,8 @@ import { useGraph } from "@/contexts/GraphContext";
 import { AcceptedFileExtensions } from "@/types";
 import { layouts } from ".";
 import GraphFactory from "@/lib/graphs/GraphFactory";
-import { ArrowLeftIcon, ArrowRightIcon, DownloadIcon, FileDownIcon, InfoIcon, SquareCheckIcon } from "lucide-react";
+import { ArrowLeftIcon, ArrowRightIcon, DownloadIcon, FileDownIcon, InfoIcon } from "lucide-react";
 import { Button } from "../ui/button";
-import { motion } from "motion/react";
 import Image from "next/image";
 
 
