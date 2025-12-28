@@ -1,7 +1,7 @@
 import { useGraph } from "@/contexts/GraphContext";
 import { motion } from "motion/react";
-import { RippleButton } from "../ui/shadcn-io/ripple-button";
 import { PiGraph } from "react-icons/pi";
+import { Button } from "../ui/button";
 
 export default function NewGraph() {
     const { resetGraph } = useGraph();
@@ -12,10 +12,10 @@ export default function NewGraph() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
         >
-            <RippleButton className="w-full" variant={'outline'} onClick={resetGraph}>
+            <Button className="cursor-pointer w-full" variant={'outline'} onClick={resetGraph}>
                 <PiGraph />
                 Novo grafo
-            </RippleButton>
+            </Button>
         </motion.div>
     );
 }

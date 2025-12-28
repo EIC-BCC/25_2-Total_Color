@@ -10,9 +10,9 @@ export default function AppBar() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     return (
-        <menu className="bg-blue-500 flex gap-4 items-center justify-between px-12 py-4 relative shadow">
+        <menu className="bg-gradient-to-r from-blue-500 to-blue-400 flex gap-4 items-center justify-between px-4 py-3 relative shadow">
 
-            <h2 className="flex gap-[0.1rem] select-none text-2xl text-white">
+            <h1 className="font-semibold select-none text-xl lg:text-[22px] text-white">
                 {title.split("").map((char, index) => (
                     <span
                         key={index}
@@ -22,7 +22,7 @@ export default function AppBar() {
                         {char}
                     </span>
                 ))}
-            </h2>
+            </h1>
 
             <div className="hidden xl:flex flex-wrap gap-2">
                 <AppbarItems />
@@ -30,7 +30,7 @@ export default function AppBar() {
 
             <Drawer open={mobileMenuOpen} onOpenChange={setMobileMenuOpen} direction="right">
                 <DrawerTrigger asChild>
-                    <Button className="inline xl:hidden" variant="outline">
+                    <Button className="cursor-pointer inline xl:hidden" variant="outline">
                         <MenuIcon />
                     </Button>
                 </DrawerTrigger>

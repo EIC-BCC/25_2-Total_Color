@@ -1,13 +1,12 @@
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
-import { RippleButton } from "../ui/shadcn-io/ripple-button";
 import { CgNotes } from "react-icons/cg";
 import { motion } from "motion/react";
-import { useGraph } from "@/contexts/GraphContext";
 import { useEffect, useState } from "react";
 import { PiHandTapLight, PiMouseScrollLight } from "react-icons/pi";
 import { HiCursorClick } from "react-icons/hi";
 import { BsShiftFill } from "react-icons/bs";
 import { InfoIcon } from "lucide-react";
+import { Button } from "../ui/button";
 
 const onlyMobile = "flex gap-2 items-center lg:hidden";
 const onlyDesktop = "gap-2 hidden items-center lg:flex";
@@ -37,10 +36,10 @@ export default function Instructions() {
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1 }}
                 >   
-                    <RippleButton variant={'outline'} className="w-full">
+                    <Button variant={'outline'} className="cursor-pointer w-full">
                         <CgNotes />
                         <span>Instruções</span>
-                    </RippleButton>
+                    </Button>
                 </motion.div>
             </DialogTrigger>
 

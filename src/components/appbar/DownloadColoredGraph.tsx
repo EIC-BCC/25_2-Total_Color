@@ -1,8 +1,8 @@
 import { useGraph } from "@/contexts/GraphContext";
 import { DownloadIcon, LoaderCircleIcon } from "lucide-react";
 import { motion } from "motion/react";
-import { RippleButton } from "../ui/shadcn-io/ripple-button";
 import { Coloring } from "@/lib/graphs/types";
+import { Button } from "../ui/button";
 
 export default function DownloadColoredGraph() {
     const { graphView } = useGraph();
@@ -44,11 +44,11 @@ export default function DownloadColoredGraph() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
         >           
-            <RippleButton className="w-full" variant={'outline'} onClick={download}>
+            <Button className="cursor-pointer w-full" variant={'outline'} onClick={download}>
                 {true ? <DownloadIcon /> : <LoaderCircleIcon className="animate-spin" />}
 
                 Baixar grafo com coloração
-            </RippleButton>
+            </Button>
         </motion.div>
     );
 }

@@ -282,12 +282,7 @@ const showColoring = (cy: Core, graph: Graph, updateDisplayedColoring: (cyElemen
 
     let index = 0;
 
-    const intervalId = setInterval(() => {
-        if (index >= coloring.length) {
-            clearInterval(intervalId);
-            return;
-        }
-
+    const assignColor = () => {
         const [elementId, color] = coloring[index];
         const icolor = Number(color);
         const cyElement = cy.$id(convertToCyElementId(elementId));
@@ -300,6 +295,19 @@ const showColoring = (cy: Core, graph: Graph, updateDisplayedColoring: (cyElemen
         updateDisplayedColoring(cyElement.data('id'), String(icolor + 1));
 
         index++;
+    };
+
+    // Immediate color assignment to the first element
+    assignColor();
+
+    // Interval color assignment to other elements
+    const intervalId = setInterval(() => {
+        if (index >= coloring.length) {
+            clearInterval(intervalId);
+            return;
+        }
+
+        assignColor();
     }, 1000);
 
     return intervalId;

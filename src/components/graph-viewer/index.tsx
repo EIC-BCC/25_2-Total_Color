@@ -71,7 +71,7 @@ export default function GraphViewer() {
 
     return (
         <motion.section
-            className="bg-gradient-to-b from-gray-50 to-gray-100 flex flex-col grow items-center justify-center relative"
+            className="bg-gradient-to-b from-gray-100 to-gray-200 flex flex-col grow items-center justify-center relative"
         >
             {graphView.active ?
                 <>

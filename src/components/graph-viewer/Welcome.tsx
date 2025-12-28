@@ -10,24 +10,24 @@ export default function Welcome() {
             transition={{ duration: 1 }}
         >
             <GraphGenerator graphMode="classes">
-                <div className="border bg-white cursor-pointer duration-200 hover:border-blue-500 hover:scale-105 flex flex-col gap-2 p-4 rounded-lg ease-in-out max-w-sm shadow-lg">
-                    <h2 className="font-bold text-2xl">
+                <div className="border-2 border-l-4 bg-white cursor-pointer duration-200 hover:border-l-blue-500 hover:scale-102 flex flex-col gap-2 p-4 rounded-lg ease-in-out max-w-sm shadow-md">
+                    <h2 className="font-bold text-xl">
                         Classes
                     </h2>
 
-                    <p className="text-md">
+                    <p className="">
                         Visualize classes de grafos, realize a coloração total e verifique a solução.
                     </p>
                 </div>
             </GraphGenerator>
 
             <GraphGenerator graphMode="free">
-                <div className="border bg-white cursor-pointer duration-200 hover:border-blue-500 hover:scale-105 flex flex-col gap-2 p-4 rounded-lg ease-in-out max-w-sm shadow-lg">
-                    <h2 className="font-bold text-2xl">
+                <div className="border-2 border-l-4 bg-white cursor-pointer duration-200 hover:border-l-blue-500 hover:scale-102 flex flex-col gap-2 p-4 rounded-lg ease-in-out max-w-sm shadow-md">
+                    <h2 className="font-bold text-xl">
                         Livre
                     </h2>
 
-                    <p className="text-md">
+                    <p className="">
                         Adicione um .txt com uma matriz de adjacência ou um arquivo .g6, e realize a coloração total.
                     </p>
                 </div>

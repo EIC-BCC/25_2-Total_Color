@@ -2,8 +2,8 @@ import { useGraph } from "@/contexts/GraphContext";
 import { FileType2Icon, LoaderCircleIcon } from "lucide-react";
 import { motion } from "motion/react";
 import { useState } from "react";
-import { RippleButton } from "../ui/shadcn-io/ripple-button";
 import Graph6 from "graph6";
+import { Button } from "../ui/button";
 
 export default function DownloadGraph6() {
     const { graph, graphView } = useGraph();
@@ -28,11 +28,11 @@ export default function DownloadGraph6() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
         >           
-            <RippleButton className="w-full" variant={'outline'} onClick={download}>
+            <Button className="cursor-pointer w-full" variant={'outline'} onClick={download}>
                 {isDownloading ? <LoaderCircleIcon className="animate-spin" /> : <FileType2Icon />}
 
                 Baixar em graph6
-            </RippleButton>
+            </Button>
         </motion.div>
     );
 }

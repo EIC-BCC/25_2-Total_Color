@@ -1,8 +1,8 @@
 import { InfoIcon } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
-import { RippleButton } from "../ui/shadcn-io/ripple-button";
 import { IoSchool } from "react-icons/io5";
 import { motion } from "motion/react";
+import { Button } from "../ui/button";
 
 export default function About() {
     return (
@@ -13,10 +13,10 @@ export default function About() {
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1 }}
                 >
-                    <RippleButton className="w-full" variant={'outline'}>
+                    <Button className="cursor-pointer w-full" variant={'outline'}>
                         <InfoIcon />
                         Sobre
-                    </RippleButton>
+                    </Button>
                 </motion.div>
             </DialogTrigger>
 

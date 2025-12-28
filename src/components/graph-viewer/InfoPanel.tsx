@@ -49,20 +49,18 @@ export default function InfoPanel() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
         >
-            <Card className="absolute md:p-2 md:top-5 left-0 lg:left-5 lg:max-w-sm p-1 shadow-md top-0 w-full z-10">
-                <CardContent className="flex flex-col gap-0 lg:gap-6 md:p-4 p-1 text-md">
+            <Card className="absolute left-0 p-0 shadow-md top-0 w-full z-10 md:top-5 lg:left-5 lg:max-w-sm">
+                <CardContent className="flex flex-col gap-4 p-2 md:p-4 lg:gap-6">
                     <section className="flex flex-col gap-4">
-                        <p className="border-b-2 bg-gray-100 border-blue-500 font-semibold pl-2 px-4 py-2 rounded text-lg">
-                            Coloração
-                        </p>
+                        <div>
+                            <h2 className="font-semibold text-xl">Coloração</h2>
+                        </div>
 
-                        <div className="flex flex-col gap-2 pl-4">
+                        <div className="flex flex-col gap-2">
                             {
                                 (graph.totalColoring) &&
                                 <div className="flex gap-2">
-                                    <span className="font-semibold">
-                                        Número cromático total:
-                                    </span>
+                                    <h3>Número cromático total:</h3>
 
                                     <motion.span
                                         initial={{ opacity: 0 }}
@@ -76,39 +74,56 @@ export default function InfoPanel() {
 
                             <div className="flex flex-col flex-wrap gap-2 items-start">
                                 <div className="flex gap-2">
-                                    <span className="font-semibold">
-                                        Cores utilizadas:
-                                    </span>
+                                    <h3>Cores utilizadas:</h3>
 
-                                    <span>
+                                    <motion.span
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        transition={{ duration: 1 }}
+                                    >
                                         {displayedColoringByColor.size}
-                                    </span>
+                                    </motion.span>
                                 </div>
 
-                                <div className="flex flex-wrap gap-2 lg:p-0 p-2 rounded">
-                                    {displayedColoringByColor.keys().toArray().sort((a, b) => Number(a) - Number(b)).map((elementColor) => {
-                                        const color = Number(elementColor) - 1;
+                                {displayedColoringByColor.size > 0 && (
+                                    <div className="flex gap-2">
+                                        <h3>Cores:</h3>
 
-                                        return (
-                                            <span
-                                                key={elementColor}
-                                                style={{
-                                                    color: HexadecimalColors.get(color)
-                                                }}
-                                            >
-                                                {elementColor}
-                                            </span>
-                                        );
-                                    })}
-                                </div>
+                                        <div className="flex flex-wrap gap-2">
+                                            {displayedColoringByColor.keys().toArray().sort((a, b) => Number(a) - Number(b)).map((elementColor) => {
+                                                const color = Number(elementColor) - 1;
+                                                const colorHex = HexadecimalColors.get(color);
+
+                                                return (
+                                                    <motion.span
+                                                        initial={{ opacity: 0 }}
+                                                        animate={{ opacity: 1 }}
+                                                        transition={{ duration: 1 }}
+                                                        key={elementColor}
+                                                        style={{
+                                                            color: colorHex,
+                                                            borderColor: colorHex,
+                                                            borderWidth: "1px",
+                                                            padding: "0.2px 6px",
+                                                        }}
+                                                    >
+                                                        {elementColor}
+                                                    </motion.span>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </section>
 
                     {graphView.actionMode !== "view" && (
                         <section className="flex flex-col gap-4">
-                            <div className="border-b-2 bg-gray-100 border-blue-500 font-semibold flex justify-between items-center pl-2 px-4 py-2 rounded text-lg">
-                                Modo {modesConfig[graphView.actionMode].title}
+                            <div className="flex justify-between items-center">
+                                <h2 className="font-semibold text-xl">
+                                    Modo {modesConfig[graphView.actionMode].title}
+                                </h2>
 
                                 <Button
                                     variant="outline"
@@ -123,7 +138,7 @@ export default function InfoPanel() {
                             </div>
 
                             {showInstructions && (
-                                <div>
+                                <div className="flex flex-col gap-2">
                                     <div className="flex gap-2 items-center">
                                         <HiCursorClick className="hidden lg:flex" size={30} />
                                         <PiHandTapLight className="flex lg:hidden" size={30} />

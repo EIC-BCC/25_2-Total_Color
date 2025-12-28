@@ -41,11 +41,13 @@ export default function AppbarItems({
                     <div onClick={onItemClick}>
                         <ButtonActionMode actionMode="edge" text="Adicionar aresta (e)" />
                     </div>
-
-                    <div onClick={onItemClick}>
-                        <ButtonActionMode actionMode="coloring" text="Atribuir cor (c)" />
-                    </div>
                 </>
+            )}
+
+            {graphView.active && (
+                <div onClick={onItemClick}>
+                    <ButtonActionMode actionMode="coloring" text="Atribuir cor (c)" />
+                </div>
             )}
 
             {graphView.active && (
