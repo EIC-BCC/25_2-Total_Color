@@ -6,7 +6,7 @@ import AppbarItems from "./AppbarItems";
 import { useState } from "react";
 
 export default function AppBar() {
-    const title = "Total-Color";
+    const title = "Total Color";
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     return (

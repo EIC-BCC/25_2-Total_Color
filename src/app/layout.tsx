@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-    title: "Total-Color",
+    title: "Total Color",
     description: "Uma aplicação web para coloração total em classes de grafos",
 };
 

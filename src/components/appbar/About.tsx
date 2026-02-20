@@ -27,12 +27,13 @@ export default function About() {
                 </DialogHeader>
 
                 <section className="flex flex-col gap-2">
-                    <p>
-                        Sistema produto do TCC:
-                        <span className="italic">
-                            &quot;Total-color: uma aplicação web para coloração total em grafos&quot;.
+                    <div>
+                        <span>Sistema produto do TCC:</span>
+
+                        <span className="italic ml-1">
+                            &quot;Total Color: uma aplicação web para coloração total em grafos&quot;.
                         </span>
-                    </p>
+                    </div>
 
                     <div className="flex flex-col gap-2">
                         <p className="font-semibold">Autor:</p>
